@@ -25,6 +25,8 @@ module.exports = {
     ],
     'react/jsx-props-no-spreading': 'off',
     'arrow-body-style': ['error', 'always'],
-    'react/function-component-definition': 'off'
+    'react/function-component-definition': 'off',
+    'import/prefer-default-export': 'off',
+    'import/extensions': 'off'
   }
 }
