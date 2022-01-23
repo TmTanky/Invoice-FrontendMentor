@@ -1,9 +1,13 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+// import { useWindow } from '../hooks/useWindow'
 
 import { Sidebar } from '../components/Sidebar'
 
 const Home: NextPage = () => {
+  // const window = useWindow()
+  // const isMobile = (window.width as number) < 700
+
   return (
     <div>
       <Head>

@@ -4,9 +4,13 @@ import { BiBasketball } from 'react-icons/bi'
 import { IoPersonCircle } from 'react-icons/io5'
 import * as S from './Sidebar.styles'
 
+// type SideBarProps = {
+//   isMobile: boolean
+// }
+
 export const Sidebar = () => {
   return (
-    <S.Container>
+    <S.Container >
       <S.UpperContainer>
         <div className='logo'>
           <BiBasketball size={60} color='white' />
