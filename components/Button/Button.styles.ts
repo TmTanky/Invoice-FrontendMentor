@@ -4,4 +4,6 @@ type ButtonProps = {
   status: 'paid' | 'pending' | 'draft'
 }
 
-export const Button = styled.button<ButtonProps>``
+export const Button = styled.button<ButtonProps>`
+    background-color: ${({ })};
+`

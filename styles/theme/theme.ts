@@ -1,4 +1,4 @@
-import { DefaultTheme } from 'styled-components'
+// import { DefaultTheme } from 'styled-components'
 
 export const darkTheme = {
   bgTransparent: {
@@ -11,4 +11,4 @@ export const darkTheme = {
     pending: 'rgb(255, 143, 0)',
     draft: 'rgb(223, 227, 250)'
   }
-} as DefaultTheme
+}
