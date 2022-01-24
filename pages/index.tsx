@@ -2,13 +2,9 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { InvoiceItem } from '../components/InvoiceItem'
 import * as S from '../components/Pages/Index/Index.styles'
-// import { useWindow } from '../hooks/useWindow'
-
 // import { Sidebar } from '../components/Sidebar'
 
 const Home: NextPage = () => {
-  // const window = useWindow()
-  // const isMobile = (window.width as number) < 700
 
   return (
     <div>

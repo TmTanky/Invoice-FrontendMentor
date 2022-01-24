@@ -14,6 +14,7 @@ export const Container = styled.div`
   padding: 10px 0;
 
   @media screen and (min-width: 300px) and (max-width: 600px) {
+    min-height: 110px;
   }
 `
 
@@ -60,10 +61,21 @@ export const Lower = styled.div`
   justify-content: space-around;
   align-items: center;
 
+  p {
+    &.amount {
+      font-weight: 700;
+      color: white;
+    }
+  }
+
   @media screen and (min-width: 300px) and (max-width: 600px) {
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
     margin-right: 20px;
+
+    p.amount {
+      margin-bottom: 10px;
+    }
   }
 `
