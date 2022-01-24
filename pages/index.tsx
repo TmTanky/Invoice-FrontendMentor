@@ -1,8 +1,10 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { InvoiceItem } from '../components/InvoiceItem'
+import * as S from '../components/Pages/Index/Index.styles'
 // import { useWindow } from '../hooks/useWindow'
 
-import { Sidebar } from '../components/Sidebar'
+// import { Sidebar } from '../components/Sidebar'
 
 const Home: NextPage = () => {
   // const window = useWindow()
@@ -16,7 +18,10 @@ const Home: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <Sidebar />
+      {/* <Sidebar /> */}
+      <S.RootContainer>
+        <InvoiceItem />
+      </S.RootContainer>
     </div>
   )
 }

@@ -61,17 +61,23 @@ export const LowerContainter = styled.div`
 
 export const ThemeToggle = styled.div`
   flex: 1;
-  /* height: 80px; */
+  height: 80px;
+  width: 80px;
   /* background-color: blue; */
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: solid 1px gray;
+  
+  @media screen and (min-width: 300px) and (max-width: 650px) {
+    border-bottom: none;
+  }
 `
 
 export const Avatar = styled.div`
   flex: 1;
-  /* height: 80px; */
+  height: 80px;
+  width: 80px;
   /* background-color: yellow; */
   display: flex;
   justify-content: center;
