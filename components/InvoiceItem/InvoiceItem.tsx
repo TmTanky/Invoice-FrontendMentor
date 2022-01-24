@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from '../Button'
 import * as S from './InvoiceItem.styles'
 
 export const InvoiceItem = () => {
@@ -12,8 +13,8 @@ export const InvoiceItem = () => {
         <p className='name'> John Cena </p>
       </S.Upper>
       <S.Lower>
-        <p> $481 </p>
-        <button type='button'> PAID </button>
+        <p className='amount'> $481 </p>
+        <Button status='paid'> Paid </Button>
       </S.Lower>
     </S.Container>
   )
