@@ -17,7 +17,7 @@ export const Button = styled.button<ButtonProps>`
   color: ${({ status }) => themeSwitcher()[status]};
   outline: none;
   border: none;
-  min-width: 80px;
+  min-width: 100px;
   padding: 10px 20px;
   border-radius: 5px;
   font-weight: 700;

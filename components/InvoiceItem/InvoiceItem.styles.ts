@@ -8,6 +8,8 @@ export const Container = styled.div`
   max-width: 700px;
   height: 100%;
   min-height: 80px;
+  max-height: 80px;
+  /* height: 100px; */
   border-radius: 8px;
   overflow: hidden;
   color: white;

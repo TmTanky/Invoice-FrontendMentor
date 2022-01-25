@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const RootContainer = styled.div`
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   min-height: 100vh;
   background-color: rgb(30, 33, 57);
@@ -15,10 +15,10 @@ export const RootContainer = styled.div`
 
   .right {
     flex: 16;
-    width: 95%;
+    width: 92%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
     margin: 10px 20px;
   }
