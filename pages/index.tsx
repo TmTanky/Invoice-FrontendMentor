@@ -19,6 +19,10 @@ const Home: NextPage = () => {
         </div>
         <div className='right'>
           <InvoiceItem />
+          <InvoiceItem />
+          <InvoiceItem />
+          <InvoiceItem />
+          <InvoiceItem />
         </div>
       </S.RootContainer>
     </div>
