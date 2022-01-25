@@ -12,6 +12,7 @@ export const fakeData = [
       }
     },
     items: {
+      id: 'COIQO1',
       name: 'Coca Cola',
       qty: 2,
       price: 366,
@@ -33,6 +34,7 @@ export const fakeData = [
       }
     },
     items: {
+      id: 'COIQO1',
       name: 'Coca Cola',
       qty: 2,
       price: 366,
