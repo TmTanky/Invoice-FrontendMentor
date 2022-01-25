@@ -2,10 +2,9 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { InvoiceItem } from '../components/InvoiceItem'
 import * as S from '../components/Pages/Index/Index.styles'
-// import { Sidebar } from '../components/Sidebar'
+import { Sidebar } from '../components/Sidebar'
 
 const Home: NextPage = () => {
-
   return (
     <div>
       <Head>
@@ -14,9 +13,17 @@ const Home: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      {/* <Sidebar /> */}
       <S.RootContainer>
-        <InvoiceItem />
+        <div className='left'>
+          <Sidebar />
+        </div>
+        <div className='right'>
+          <InvoiceItem />
+          <InvoiceItem />
+          <InvoiceItem />
+          <InvoiceItem />
+          <InvoiceItem />
+        </div>
       </S.RootContainer>
     </div>
   )

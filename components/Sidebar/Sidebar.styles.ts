@@ -1,9 +1,5 @@
 import styled from 'styled-components'
 
-// type ContainerProps = {
-//   isMobile: boolean
-// }
-
 export const Container = styled.div`
   background-color: rgb(55, 59, 83);
   border-top-right-radius: 25px;
@@ -12,7 +8,6 @@ export const Container = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  position: fixed;
   top: 0;
 
   @media screen and (min-width: 300px) and (max-width: 650px) {
