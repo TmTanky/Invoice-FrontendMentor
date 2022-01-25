@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { InvoiceItem } from '../components/InvoiceItem'
 import * as S from '../components/Pages/Index/Index.styles'
+import { Toolbar } from '../components/Toolbar'
 import { Sidebar } from '../components/Sidebar'
 import { fakeData } from '../data'
 
@@ -19,6 +20,7 @@ const Home: NextPage = () => {
           <Sidebar />
         </div>
         <div className='right'>
+          <Toolbar invoiceTotal={fakeData.length} />
           {fakeData.map((item) => {
             return (
               <InvoiceItem
