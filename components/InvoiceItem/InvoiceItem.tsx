@@ -2,19 +2,33 @@ import React from 'react'
 import { Button } from '../Button'
 import * as S from './InvoiceItem.styles'
 
-export const InvoiceItem = () => {
+type InvoiceItemProps = {
+  id: string
+  dueDate: string
+  name: string
+  total: number
+  status: 'paid' | 'pending' | 'draft'
+}
+
+export const InvoiceItem = ({
+  id,
+  dueDate,
+  name,
+  total,
+  status
+}: InvoiceItemProps) => {
   return (
     <S.Container>
       <S.Upper>
         <p className='invoice-id'>
-          #<span>XM9141</span>
+          #<span>{id}</span>
         </p>
-        <p className='due-date'> Due 01 Oct 2021 </p>
-        <p className='name'> John Cena </p>
+        <p className='due-date'> {dueDate} </p>
+        <p className='name'> {name} </p>
       </S.Upper>
       <S.Lower>
-        <p className='amount'> $481 </p>
-        <Button status='paid'> Paid </Button>
+        <p className='amount'> ${total} </p>
+        <Button status={status}> {status.toUpperCase()} </Button>
       </S.Lower>
     </S.Container>
   )

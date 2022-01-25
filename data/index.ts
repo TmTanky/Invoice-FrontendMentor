@@ -1,3 +1,5 @@
+import { InvoiceType } from '../types/interfaces'
+
 export const fakeData = [
   {
     id: 'MVH17C',
@@ -43,4 +45,4 @@ export const fakeData = [
     status: 'pending',
     dueDate: '2019-12-31'
   }
-]
+] as InvoiceType[]
