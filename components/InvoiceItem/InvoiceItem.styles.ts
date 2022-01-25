@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   margin: 20px;
-  background-color: rgb(30, 33, 57);
+  background-color: rgb(55, 59, 83);
   display: flex;
   width: 100%;
   max-width: 700px;
