@@ -8,6 +8,7 @@ export const RootContainer = styled.div`
   background-color: rgb(20, 22, 37);
 
   .left {
+    position: relative;
     flex: 1;
     width: 100%;
     display: flex;
