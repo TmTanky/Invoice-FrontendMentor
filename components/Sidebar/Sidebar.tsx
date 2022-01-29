@@ -2,15 +2,12 @@ import React from 'react'
 import Image from 'next/image'
 import { BiBasketball } from 'react-icons/bi'
 import { IoPersonCircle } from 'react-icons/io5'
+import { Form } from '../Form'
 import * as S from './Sidebar.styles'
-
-// type SideBarProps = {
-//   isMobile: boolean
-// }
 
 export const Sidebar = () => {
   return (
-    <S.Container >
+    <S.Container>
       <S.UpperContainer>
         <div className='logo'>
           <BiBasketball size={60} color='white' />
@@ -29,6 +26,7 @@ export const Sidebar = () => {
           <IoPersonCircle color='white' size={40} />
         </S.Avatar>
       </S.LowerContainter>
+      <Form />
     </S.Container>
   )
 }
