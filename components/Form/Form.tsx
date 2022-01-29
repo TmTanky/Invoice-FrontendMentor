@@ -8,9 +8,9 @@ export const Form = () => {
       <div className='user'>
         <h1> Create Invoice </h1>
         <label htmlFor='fullName'> Full Name </label>
-        <input type='text' placeholder='Full Name' name='' id='' />
+        <input type='text' name='' id='' />
         <label htmlFor="email"> Email Address </label>
-        <input type='text' placeholder='Email Address' name='' id='' />
+        <input type='text' name='' id='' />
       </div>
     </S.Container>
   )

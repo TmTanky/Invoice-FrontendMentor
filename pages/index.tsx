@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { InvoiceItem } from '../components/InvoiceItem'
+import { Form } from '../components/Form'
 import * as S from '../components/Pages/Index/Index.styles'
 import { Sidebar } from '../components/Sidebar'
 import { fakeData } from '../data'
@@ -17,6 +18,7 @@ const Home: NextPage = () => {
       <S.RootContainer>
         <div className='left'>
           <Sidebar />
+          <Form />
         </div>
         <div className='right'>
           {fakeData.map((item) => {
