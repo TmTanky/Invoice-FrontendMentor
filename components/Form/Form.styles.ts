@@ -19,9 +19,11 @@ export const Container = styled.div`
     max-width: 650px;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
+    overflow-y: scroll;
     cursor: default;
 
-    .user {
+    .user,
+    .address {
       z-index: 40;
       position: relative;
       display: flex;
@@ -48,6 +50,41 @@ export const Container = styled.div`
         font-weight: 600;
         border: 1px solid rgb(37, 41, 69);
       }
+
+      @media screen and (max-width: 650px) {
+        margin: 140px 20px 40px 20px;
+      }
+    }
+
+    .button-group {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      margin: 0 50px 40px 130px;
+      color: white;
+
+      button {
+        padding: 0.8rem 1.5rem;
+        color: white;
+        font-weight: 600;
+        border-radius: 25px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+
+        &.discard {
+          background-color: rgb(30, 33, 57);
+        }
+
+        &.create {
+          background-color: rgb(124, 93, 250);
+        }
+      }
+    }
+
+    @media screen and (max-width: 650px) {
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
     }
   }
 `
