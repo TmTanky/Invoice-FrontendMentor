@@ -40,17 +40,6 @@ export const Container = styled.div`
         font-size: 14px;
       }
 
-      input {
-        padding: 13px;
-        background-color: rgb(30, 33, 57);
-        border-radius: 5px;
-        outline: none;
-        border: none;
-        color: white;
-        font-weight: 600;
-        border: 1px solid rgb(37, 41, 69);
-      }
-
       @media screen and (max-width: 650px) {
         margin: 140px 20px 40px 20px;
       }
@@ -78,6 +67,77 @@ export const Container = styled.div`
 
         &.create {
           background-color: rgb(124, 93, 250);
+        }
+      }
+    }
+
+    .item-list {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      margin: 0 50px 40px 130px;
+      color: white;
+
+      p {
+        margin-bottom: 20px;
+      }
+
+      button {
+        width: 100%;
+        padding: 0.8rem 1.5rem;
+        color: white;
+        font-weight: 600;
+        border-radius: 25px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        background-color: rgb(124, 93, 250);
+        margin-top: 10px;
+      }
+
+      input {
+        margin: 10px 0;
+      }
+
+      label {
+        font-size: 14px;
+      }
+
+      .item {
+        display: flex;
+
+        .name {
+          flex: 2;
+        }
+
+        .other-info {
+          display: flex;
+
+          .qty {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            input {
+              width: 80%;
+            }
+          }
+
+          .price {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            input {
+              width: 80%;
+            }
+          }
+
+          .delete {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
         }
       }
     }

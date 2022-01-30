@@ -1,5 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { Dispatch, SetStateAction, MouseEvent } from 'react'
+import React, { Dispatch, SetStateAction, MouseEvent, useState } from 'react'
+import { AiFillDelete } from 'react-icons/ai'
+import { nanoid } from 'nanoid'
+import { Input } from '../Input'
 import * as S from './Form.styles'
 
 type FormProps = {
@@ -7,6 +10,8 @@ type FormProps = {
 }
 
 export const Form = ({ setShowForm }: FormProps) => {
+  const [list, setList] = useState<string[]>(['a'])
+
   return (
     <S.Container onClick={() => setShowForm((prev) => !prev)}>
       <div
@@ -18,20 +23,20 @@ export const Form = ({ setShowForm }: FormProps) => {
           <h1> Create Invoice </h1>
           <p> User </p>
           <label htmlFor='fullName'> Full Name </label>
-          <input type='text' name='' id='' />
+          <Input type='text' name='' id='' />
           <label htmlFor='email'> Email Address </label>
-          <input type='text' name='' id='' />
+          <Input type='text' name='' id='' />
         </div>
         <div className='address'>
           <p> Address </p>
           <label htmlFor='address'> Street Address </label>
-          <input type='text' name='' id='' />
+          <Input type='text' name='' id='' />
           <label htmlFor='city'> City </label>
-          <input type='text' name='' id='' />
+          <Input type='text' name='' id='' />
           <label htmlFor='state'> Country </label>
-          <input type='text' name='' id='' />
+          <Input type='text' name='' id='' />
           <label htmlFor='zip'> Zip Code </label>
-          <input type='text' name='' id='' />
+          <Input type='text' name='' id='' />
         </div>
         <div className='button-group'>
           <button
@@ -43,6 +48,40 @@ export const Form = ({ setShowForm }: FormProps) => {
           </button>
           <button className='create' type='button'>
             Create
+          </button>
+        </div>
+        <div className='item-list'>
+          <p> Item List </p>
+          {list.map(() => {
+            return (
+              <div key={nanoid(5)} className='item'>
+                <div className='name'>
+                  <label htmlFor='name'> Name </label>
+                  <Input type='text' />
+                </div>
+                <div className='other-info'>
+                  <div className='qty'>
+                    <label htmlFor='qty'> Qty </label>
+                    <Input type='number' />
+                  </div>
+                  <div className='price'>
+                    <label htmlFor='price'> Price </label>
+                    <Input type='number' />
+                  </div>
+                  <div className='delete'>
+                    <AiFillDelete size={20} />
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+          <button
+            onClick={() => {
+              setList((prev) => [...prev, 'a'])
+            }}
+            type='button'
+          >
+            Add Item
           </button>
         </div>
       </div>
