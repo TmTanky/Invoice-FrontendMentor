@@ -16,7 +16,7 @@ export const Container = styled.div`
     background-color: rgb(20, 22, 37);
     width: 100%;
     height: 100%;
-    max-width: 650px;
+    max-width: 750px;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
     overflow-y: scroll;
@@ -69,6 +69,10 @@ export const Container = styled.div`
           background-color: rgb(124, 93, 250);
         }
       }
+
+      @media screen and (max-width: 650px) {
+        margin: 0px 20px 40px 20px;
+      }
     }
 
     .item-list {
@@ -108,37 +112,53 @@ export const Container = styled.div`
 
         .name {
           flex: 2;
+          display: flex;
+          flex-direction: column;
         }
 
         .other-info {
+          flex: 1;
           display: flex;
 
-          .qty {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            input {
-              width: 80%;
-            }
-          }
-
+          .qty,
           .price {
-            flex: 1;
+            flex: 6;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             input {
-              width: 80%;
+              width: 85%;
             }
           }
 
           .delete {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
           }
         }
+
+        @media screen and (max-width: 650px) {
+          flex-direction: column;
+
+          .other-info {
+            .qty,
+            .price {
+              align-items: flex-start;
+              justify-content: flex-start;
+
+              input {
+                width: 100px;
+              }
+            }
+          }
+        }
+      }
+
+      @media screen and (max-width: 650px) {
+        margin: 0px 20px 40px 20px;
       }
     }
 
