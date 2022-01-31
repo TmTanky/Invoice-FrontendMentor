@@ -1,12 +1,16 @@
+import { useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { InvoiceItem } from '../components/InvoiceItem'
+import { Form } from '../components/Form'
 import * as S from '../components/Pages/Index/Index.styles'
 import { Toolbar } from '../components/Toolbar'
 import { Sidebar } from '../components/Sidebar'
 import { fakeData } from '../data'
 
 const Home: NextPage = () => {
+  const [showForm, setShowForm] = useState(false)
+
   return (
     <div>
       <Head>
@@ -18,9 +22,10 @@ const Home: NextPage = () => {
       <S.RootContainer>
         <div className='left'>
           <Sidebar />
+          {showForm && <Form setShowForm={setShowForm} />}
         </div>
         <div className='right'>
-          <Toolbar invoiceTotal={fakeData.length} />
+          <Toolbar setShowForm={setShowForm} invoiceTotal={fakeData.length} />
           {fakeData.map((item) => {
             return (
               <InvoiceItem

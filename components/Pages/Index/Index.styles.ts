@@ -5,9 +5,10 @@ export const RootContainer = styled.div`
   /* align-items: center; */
   justify-content: center;
   min-height: 100vh;
-  background-color: rgb(30, 33, 57);
+  background-color: rgb(20, 22, 37);
 
   .left {
+    position: relative;
     flex: 1;
     width: 100%;
     display: flex;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import Select from 'react-select'
 import * as S from './Toolbar.styles'
 
@@ -10,9 +10,10 @@ const options = [
 
 type ToolbarProps = {
   invoiceTotal: number
+  setShowForm: Dispatch<SetStateAction<boolean>>
 }
 
-export const Toolbar = ({ invoiceTotal }: ToolbarProps) => {
+export const Toolbar = ({ invoiceTotal, setShowForm }: ToolbarProps) => {
   return (
     <S.Container>
       <div className='info'>
@@ -49,7 +50,9 @@ export const Toolbar = ({ invoiceTotal }: ToolbarProps) => {
         />
       </div>
       <div className='add'>
-        <button type='button'> New Invoice </button>
+        <button onClick={() => setShowForm((prev) => !prev)} type='button'>
+          New Invoice
+        </button>
       </div>
     </S.Container>
   )

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   margin: 10px 20px;
-  background-color: rgb(55, 59, 83);
+  background-color: rgb(30, 33, 57);
   display: flex;
   width: 100%;
   max-width: 700px;
@@ -10,13 +10,19 @@ export const Container = styled.div`
   min-height: 80px;
   max-height: 80px;
   /* height: 100px; */
+  border: solid 1px transparent;
   border-radius: 8px;
   overflow: hidden;
   color: white;
   padding: 10px 0;
+  cursor: pointer;
 
   @media screen and (min-width: 300px) and (max-width: 600px) {
     min-height: 110px;
+  }
+
+  &:hover {
+    border-color: rgb(124, 93, 250);
   }
 `
 
