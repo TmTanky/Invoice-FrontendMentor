@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import { Button } from '../Button'
 import * as S from './InvoiceItem.styles'
 
@@ -17,8 +18,10 @@ export const InvoiceItem = ({
   total,
   status
 }: InvoiceItemProps) => {
+  const router = useRouter()
+
   return (
-    <S.Container>
+    <S.Container onClick={() => router.push(`/invoice/${id}`)}>
       <S.Upper>
         <p className='invoice-id'>
           #<span>{id}</span>
