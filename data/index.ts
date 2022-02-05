@@ -17,11 +17,11 @@ export const fakeData = [
       id: 'COIQO1',
       name: 'Coca Cola',
       qty: 2,
-      price: 366,
-      total: 732
+      price: 366
     },
     status: 'paid',
-    dueDate: '2010-2-22'
+    dueDate: '2010-2-22',
+    total: 732
   },
   {
     id: 'VHF17X',

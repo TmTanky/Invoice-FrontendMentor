@@ -1,5 +1,7 @@
 import React from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { Info } from '../../components/Invoice/Info/Info'
+import * as S from '../../components/Pages/Invoice/index.styles'
 import { fakeData } from '../../data'
 import { InvoiceType } from '../../types/interfaces'
 
@@ -8,7 +10,13 @@ type InvoiceItemPageProps = {
 }
 
 const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
-  return <h1> {invoice.id} </h1>
+  return (
+    <div>
+      <S.Container>
+        <Info invoice={invoice} />
+      </S.Container>
+    </div>
+  )
 }
 
 export default InvoiceItemPage

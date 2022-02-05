@@ -6,4 +6,5 @@ export interface InvoiceType {
   items: Items
   status: Status
   dueDate: string
+  total: number
 }

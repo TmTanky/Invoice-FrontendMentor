@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { InvoiceItem } from '../components/InvoiceItem'
+import { InvoiceItem } from '../components/Invoice'
 import * as S from '../components/Pages/Index/Index.styles'
 // import { Toolbar } from '../components/Toolbar'
 import { fakeData } from '../data'

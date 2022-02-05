@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { Button } from '../Button'
-import * as S from './InvoiceItem.styles'
+import { Button } from '../../Button'
+import * as S from './Item.styles'
 
 type InvoiceItemProps = {
   id: string
