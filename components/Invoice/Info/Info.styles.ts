@@ -4,10 +4,92 @@ export const Container = styled.div`
   color: white;
   width: 100%;
   max-width: 700px;
-  background-color: blue;
+  background-color: rgb(30, 33, 57);
+  margin: 0 15px;
+  margin-top: 100px;
+  padding: 1.5rem;
+  height: max-content;
+  border-radius: 5px;
+
   .upper {
     display: flex;
     justify-content: space-between;
-    background-color: yellow;
+    margin-bottom: 60px;
+
+    .left {
+      flex: 1;
+    }
+
+    .right {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
+  .middle {
+    display: flex;
+    margin-bottom: 60px;
+
+    p {
+      margin-bottom: 8px;
+    }
+
+    .left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .right {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
+  .lower {
+    background-color: rgb(37, 41, 69);
+    padding: 1.5rem;
+    border-radius: 5px;
+
+    .items {
+      padding: 1rem 0;
+
+      .item {
+        display: flex;
+
+        .left {
+          flex: 1;
+          display: flex;
+          flex-direction: row;
+
+          .name {
+            flex: 1;
+          }
+
+          .qty {
+            flex: 1;
+          }
+        }
+        .right {
+          flex: 1;
+          display: flex;
+          flex-direction: row;
+
+          .price {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+          }
+
+          .total {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
+      }
+    }
   }
 `

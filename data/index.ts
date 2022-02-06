@@ -13,12 +13,15 @@ export const fakeData = [
         country: 'USA'
       }
     },
-    items: {
-      id: 'COIQO1',
-      name: 'Coca Cola',
-      qty: 2,
-      price: 366
-    },
+    items: [
+      {
+        id: 'COIQO1',
+        name: 'Coca Cola',
+        qty: 2,
+        price: 366,
+        total: 299
+      }
+    ],
     status: 'paid',
     dueDate: '2010-2-22',
     total: 732
@@ -35,13 +38,15 @@ export const fakeData = [
         country: 'USA'
       }
     },
-    items: {
-      id: 'COIQO1',
-      name: 'Coca Cola',
-      qty: 2,
-      price: 366,
-      total: 732
-    },
+    items: [
+      {
+        id: 'COIQO1',
+        name: 'Coca Cola',
+        qty: 2,
+        price: 366,
+        total: 732
+      }
+    ],
     status: 'pending',
     dueDate: '2019-12-31'
   }

@@ -10,6 +10,7 @@ export type Items = {
   name: string
   qty: number
   price: number
+  total: number
 }
 
 export type Status = 'paid' | 'pending' | 'draft'
