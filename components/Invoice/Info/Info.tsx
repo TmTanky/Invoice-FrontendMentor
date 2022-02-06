@@ -8,6 +8,7 @@ type InfoProps = {
 
 export const Info = ({ invoice: { id, user, dueDate, items } }: InfoProps) => {
   const { address, email } = user
+  const total = items.reduce((acc, curr) => acc + curr.total, 0)
 
   return (
     <S.Container>
@@ -26,15 +27,33 @@ export const Info = ({ invoice: { id, user, dueDate, items } }: InfoProps) => {
       <div className='middle'>
         <div className='left'>
           <p> Payment Due </p>
-          <h2> {dueDate} </h2>
+          <h4> {dueDate} </h4>
         </div>
         <div className='right'>
           <p> Sent to </p>
-          <h2> {email} </h2>
+          <h4> {email} </h4>
         </div>
       </div>
 
       <div className='lower'>
+        <div className='name-list'>
+          <div className='left'>
+            <div className='name'>
+              <h5> Item Name </h5>
+            </div>
+            <div className='qty'>
+              <h5> QTY. </h5>
+            </div>
+          </div>
+          <div className='right'>
+            <div className='price'>
+              <h5> Price </h5>
+            </div>
+            <div className='total'>
+              <h5> Total </h5>
+            </div>
+          </div>
+        </div>
         <div className='items'>
           {items.map((item) => {
             return (
@@ -49,16 +68,20 @@ export const Info = ({ invoice: { id, user, dueDate, items } }: InfoProps) => {
                 </div>
                 <div className='right'>
                   <div className='price'>
-                    <p> {item.price} </p>
+                    <p> ${item.price} </p>
                   </div>
                   <div className='total'>
-                    <p> {item.total} </p>
+                    <p> ${item.total} </p>
                   </div>
                 </div>
               </div>
             )
           })}
         </div>
+      </div>
+      <div className='total-amount'>
+        <h5> Amount Due </h5>
+        <p> {total} </p>
       </div>
     </S.Container>
   )

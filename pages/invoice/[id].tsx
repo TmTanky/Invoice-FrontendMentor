@@ -13,6 +13,9 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
   return (
     <div>
       <S.Container>
+        <div className='go-back'>
+          <button type='button'> Go back </button>
+        </div>
         <Info invoice={invoice} />
       </S.Container>
     </div>

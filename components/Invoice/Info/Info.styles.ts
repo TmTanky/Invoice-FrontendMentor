@@ -6,7 +6,7 @@ export const Container = styled.div`
   max-width: 700px;
   background-color: rgb(30, 33, 57);
   margin: 0 15px;
-  margin-top: 100px;
+  margin-top: 20px;
   padding: 1.5rem;
   height: max-content;
   border-radius: 5px;
@@ -51,13 +51,50 @@ export const Container = styled.div`
   .lower {
     background-color: rgb(37, 41, 69);
     padding: 1.5rem;
-    border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    .name-list {
+      display: flex;
+
+      .left {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+
+        .name {
+          flex: 1;
+        }
+
+        .qty {
+          flex: 1;
+        }
+      }
+      .right {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+
+        .price {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+        }
+
+        .total {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
 
     .items {
-      padding: 1rem 0;
+      padding: 0.5rem 0;
 
       .item {
         display: flex;
+        padding: 0.5rem 0;
 
         .left {
           flex: 1;
@@ -80,16 +117,25 @@ export const Container = styled.div`
           .price {
             flex: 1;
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
           }
 
           .total {
             flex: 1;
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
           }
         }
       }
     }
+  }
+
+  .total-amount {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: rgb(20, 22, 37);
   }
 `

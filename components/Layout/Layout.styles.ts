@@ -20,6 +20,7 @@ export const RootContainer = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
+    height: 100%;
   }
 
   @media screen and (min-width: 300px) and (max-width: 650px) {
