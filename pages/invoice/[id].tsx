@@ -1,7 +1,9 @@
 import React from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Info } from '../../components/Invoice/Info/Info'
+import { Button } from '../../components/Button'
 import * as S from '../../components/Pages/Invoice/index.styles'
 import { fakeData } from '../../data'
 import { InvoiceType } from '../../types/interfaces'
@@ -16,9 +18,15 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
 
   return (
     <div>
+      <Head>
+        <title> #{invoice.id} | Invoice </title>
+      </Head>
       <S.Container>
         <div className='go-back'>
-          <button onClick={() => router.back()} type='button'> Go back </button>
+          <button className='go-back-btn' onClick={() => router.back()} type='button'> Go back </button>
+          <Button status={invoice.status}>
+            {invoice.status.toUpperCase()}
+          </Button>
         </div>
         <Info invoice={invoice} />
       </S.Container>

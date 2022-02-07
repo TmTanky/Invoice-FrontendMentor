@@ -48,6 +48,7 @@ export const fakeData = [
       }
     ],
     status: 'pending',
-    dueDate: '2019-12-31'
+    dueDate: '2019-12-31',
+    total: 481
   }
 ] as InvoiceType[]

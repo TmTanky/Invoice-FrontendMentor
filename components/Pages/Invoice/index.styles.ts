@@ -18,8 +18,10 @@ export const Container = styled.div`
     padding: 1.5rem;
     height: max-content;
     border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
 
-    button {
+    .go-back-btn {
       border: none;
       outline: none;
       cursor: pointer;

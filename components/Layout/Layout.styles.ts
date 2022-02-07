@@ -8,7 +8,7 @@ export const RootContainer = styled.div`
   background-color: rgb(20, 22, 37);
 
   .left {
-    position: sticky;
+    position: relative;
     top: 0;
     flex: 1;
     width: 100%;
