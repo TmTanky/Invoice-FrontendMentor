@@ -12,9 +12,14 @@ const options = [
 type ToolbarProps = {
   invoiceTotal: number
   setShowForm: Dispatch<SetStateAction<boolean>>
+  setFilter: Dispatch<SetStateAction<string>>
 }
 
-export const Toolbar = ({ invoiceTotal, setShowForm }: ToolbarProps) => {
+export const Toolbar = ({
+  invoiceTotal,
+  setShowForm,
+  setFilter
+}: ToolbarProps) => {
   return (
     <S.Container>
       <div className='info'>
@@ -26,6 +31,7 @@ export const Toolbar = ({ invoiceTotal, setShowForm }: ToolbarProps) => {
       <div className='options'>
         <div className='select'>
           <Select
+            onChange={(e) => setFilter(e!.value)}
             placeholder='Filter by status'
             styles={{
               option: (provided) => ({

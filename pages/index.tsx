@@ -1,23 +1,34 @@
 import { useState } from 'react'
-import type { NextPage } from 'next'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { InvoiceItem } from '../components/Invoice'
 import { Form } from '../components/Form'
-import * as S from '../components/Pages/Index/Index.styles'
 import { Toolbar } from '../components/Toolbar'
+import * as S from '../components/Pages/Index/Index.styles'
 import { fakeData } from '../data'
+import { InvoiceType } from '../types/interfaces'
+import { filterInvoice } from '../utils'
 
-const Home: NextPage = () => {
+type HomeProps = {
+  invoices: InvoiceType[]
+}
+
+const Home = ({ invoices }: HomeProps) => {
   const [showForm, setShowForm] = useState(false)
+  const [filter, setFilter] = useState('')
 
   return (
     <S.Right>
       <Head>
         <title> Invoice | FrontendMentor </title>
       </Head>
-      <Toolbar setShowForm={setShowForm} invoiceTotal={fakeData.length} />
+      <Toolbar
+        setFilter={setFilter}
+        setShowForm={setShowForm}
+        invoiceTotal={invoices.length}
+      />
       {showForm && <Form setShowForm={setShowForm} />}
-      {fakeData.map((item) => {
+      {filterInvoice(invoices, filter).map((item) => {
         return (
           <InvoiceItem
             id={item.id}
@@ -29,8 +40,19 @@ const Home: NextPage = () => {
           />
         )
       })}
+      {filterInvoice(invoices, filter).length === 0 && (
+        <p className='no-invoice'> No Invoices </p>
+      )}
     </S.Right>
   )
 }
 
 export default Home
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+      invoices: fakeData
+    }
+  }
+}
