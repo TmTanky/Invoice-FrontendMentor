@@ -1,5 +1,6 @@
 import React from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { Info } from '../../components/Invoice/Info/Info'
 import * as S from '../../components/Pages/Invoice/index.styles'
 import { fakeData } from '../../data'
@@ -10,11 +11,14 @@ type InvoiceItemPageProps = {
 }
 
 const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
+
+  const router = useRouter()
+
   return (
     <div>
       <S.Container>
         <div className='go-back'>
-          <button type='button'> Go back </button>
+          <button onClick={() => router.back()} type='button'> Go back </button>
         </div>
         <Info invoice={invoice} />
       </S.Container>

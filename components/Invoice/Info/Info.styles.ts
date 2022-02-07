@@ -10,6 +10,7 @@ export const Container = styled.div`
   padding: 1.5rem;
   height: max-content;
   border-radius: 5px;
+  position: relative;
 
   .upper {
     display: flex;
@@ -46,6 +47,14 @@ export const Container = styled.div`
       display: flex;
       align-items: flex-end;
     }
+
+    @media screen and (min-width: 300px) and (max-width: 650px) {
+      flex-direction: column;
+      .right {
+          margin-top: 10px;
+        align-items: flex-start;
+      }
+    }
   }
 
   .lower {
@@ -68,6 +77,8 @@ export const Container = styled.div`
 
         .qty {
           flex: 1;
+          display: flex;
+          justify-content: center;
         }
       }
       .right {
@@ -107,6 +118,8 @@ export const Container = styled.div`
 
           .qty {
             flex: 1;
+            display: flex;
+            justify-content: center;
           }
         }
         .right {
@@ -124,6 +137,44 @@ export const Container = styled.div`
             flex: 1;
             display: flex;
             justify-content: center;
+          }
+        }
+      }
+    }
+
+    @media screen and (min-width: 300px) and (max-width: 650px) {
+      .name-list {
+        .left {
+          .qty {
+            display: none;
+          }
+        }
+
+        .right {
+          .price {
+            display: none;
+          }
+          .total {
+            justify-content: flex-end;
+          }
+        }
+      }
+
+      .items {
+        .item {
+          .left {
+            .qty {
+              display: none;
+            }
+          }
+
+          .right {
+            .price {
+              display: none;
+            }
+            .total {
+              justify-content: flex-end;
+            }
           }
         }
       }

@@ -81,7 +81,7 @@ export const Info = ({ invoice: { id, user, dueDate, items } }: InfoProps) => {
       </div>
       <div className='total-amount'>
         <h5> Amount Due </h5>
-        <p> {total} </p>
+        <p> ${total} </p>
       </div>
     </S.Container>
   )
