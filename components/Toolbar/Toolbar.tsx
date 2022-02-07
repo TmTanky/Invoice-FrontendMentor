@@ -3,6 +3,7 @@ import Select from 'react-select'
 import * as S from './Toolbar.styles'
 
 const options = [
+  { value: 'all', label: 'All' },
   { value: 'paid', label: 'Paid' },
   { value: 'pending', label: 'Pending' },
   { value: 'draft', label: 'Draft' }
@@ -22,37 +23,40 @@ export const Toolbar = ({ invoiceTotal, setShowForm }: ToolbarProps) => {
           There are {invoiceTotal} total invoices.
         </p>
       </div>
-      <div className='select'>
-        <Select
-          placeholder='Filter by status'
-          styles={{
-            option: (provided) => ({
-              ...provided,
-              backgroundColor: 'rgb(30, 33, 57)',
-              color: 'white'
-            }),
-            control: (provided) => ({
-              ...provided,
-              backgroundColor: 'rgb(30, 33, 57)',
-              border: 'none',
-              outline: 'none'
-            }),
-            menuList: (provided) => ({
-              ...provided,
-              backgroundColor: 'rgb(30, 33, 57)'
-            }),
-            placeholder: (provided) => ({
-              ...provided,
-              color: 'white'
-            })
-          }}
-          options={options}
-        />
-      </div>
-      <div className='add'>
-        <button onClick={() => setShowForm((prev) => !prev)} type='button'>
-          New Invoice
-        </button>
+      <div className='options'>
+        <div className='select'>
+          <Select
+            placeholder='Filter by status'
+            styles={{
+              option: (provided) => ({
+                ...provided,
+                backgroundColor: 'rgb(30, 33, 57)',
+                color: 'white'
+              }),
+              control: (provided) => ({
+                ...provided,
+                backgroundColor: 'rgb(30, 33, 57)',
+                border: 'none',
+                outline: 'none'
+              }),
+              menuList: (provided) => ({
+                ...provided,
+                backgroundColor: 'rgb(30, 33, 57)'
+              }),
+              placeholder: (provided) => ({
+                ...provided,
+                color: 'white'
+              })
+            }}
+            className='select-status'
+            options={options}
+          />
+        </div>
+        <div className='add'>
+          <button onClick={() => setShowForm((prev) => !prev)} type='button'>
+            +
+          </button>
+        </div>
       </div>
     </S.Container>
   )

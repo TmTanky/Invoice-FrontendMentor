@@ -1,6 +1,7 @@
 import React from 'react'
-import { Button } from '../Button'
-import * as S from './InvoiceItem.styles'
+import { useRouter } from 'next/router'
+import { Button } from '../../Button'
+import * as S from './Item.styles'
 
 type InvoiceItemProps = {
   id: string
@@ -17,8 +18,10 @@ export const InvoiceItem = ({
   total,
   status
 }: InvoiceItemProps) => {
+  const router = useRouter()
+
   return (
-    <S.Container>
+    <S.Container onClick={() => router.push(`/invoice/${id}`)}>
       <S.Upper>
         <p className='invoice-id'>
           #<span>{id}</span>
