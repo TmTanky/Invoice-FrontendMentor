@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { InvoiceItem } from '../components/Invoice'
@@ -16,6 +16,15 @@ type HomeProps = {
 const Home = ({ invoices }: HomeProps) => {
   const [showForm, setShowForm] = useState(false)
   const [filter, setFilter] = useState('')
+
+  useEffect(() => {
+    const sample = async () => {
+      const data = await fetch('/api/hello')
+      console.log(data)
+    }
+
+    sample()
+  }, [])
 
   return (
     <S.Right>
