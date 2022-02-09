@@ -14,12 +14,9 @@ export default async function handler(
     url: `redis://${process.env.REDIS_USERNAME}:${process.env.REDIS_USER_PASSWORD}@${process.env.REDIS_HOST}`
   })
 
-  client.on('error', (err) => console.log('Redis Client Error', err))
+  client.on('error', (err) => err)
 
   await client.connect()
-
-  // await client.set('potangina', 'tarantado')
-  console.log(await client.del('potangina'))
 
   res.status(200).json({ name: 'John Doe' })
 }

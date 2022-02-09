@@ -1,16 +1,39 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { Dispatch, SetStateAction, MouseEvent, useState } from 'react'
-import { AiFillDelete } from 'react-icons/ai'
-import { nanoid } from 'nanoid'
-import { Input } from '../Input'
+import React, {
+  Dispatch,
+  SetStateAction,
+  MouseEvent
+  // useState
+} from 'react'
+// import { AiFillDelete } from 'react-icons/ai'
+// import { nanoid } from 'nanoid'
+// import { Input } from '../Input'
+import { Formik, Field, Form as FormMan } from 'formik'
 import * as S from './Form.styles'
+// import { Items } from '../../types/types'
 
 type FormProps = {
   setShowForm: Dispatch<SetStateAction<boolean>>
 }
 
 export const Form = ({ setShowForm }: FormProps) => {
-  const [list, setList] = useState<string[]>([])
+  // const [list, setList] = useState<string[]>([])
+  // const [form, setForm] = useState({
+  //   fullName: '',
+  //   email: '',
+  //   streetAddress: '',
+  //   city: '',
+  //   country: '',
+  //   zipCode: ''
+  // })
+  // const [itemList, setItemsList] = useState<Items[]>([])
+
+  // const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+  //   setForm({
+  //     ...form,
+  //     [e.target.name]: e.target.value
+  //   })
+  // }
 
   return (
     <S.Container onClick={() => setShowForm((prev) => !prev)}>
@@ -19,33 +42,64 @@ export const Form = ({ setShowForm }: FormProps) => {
         onClick={(e: MouseEvent) => e.stopPropagation()}
         className='form'
       >
-        <div className='user'>
-          <h1> Create Invoice </h1>
-          <p> User </p>
-          <label htmlFor='fullName'> Full Name </label>
-          <Input type='text' name='' id='' />
-          <label htmlFor='email'> Email Address </label>
-          <Input type='text' name='' id='' />
-        </div>
-        <div className='address'>
-          <p> Address </p>
-          <label htmlFor='address'> Street Address </label>
-          <Input type='text' name='' id='' />
-          <label htmlFor='city'> City </label>
-          <Input type='text' name='' id='' />
-          <label htmlFor='state'> Country </label>
-          <Input type='text' name='' id='' />
-          <label htmlFor='zip'> Zip Code </label>
-          <Input type='text' name='' id='' />
-        </div>
-        <div className='item-list'>
+        <Formik
+          initialValues={{
+            fullName: '',
+            email: '',
+            streetAddress: '',
+            city: '',
+            country: '',
+            zipCode: ''
+          }}
+          onSubmit={async (values) => {
+            console.log(values)
+          }}
+        >
+          <FormMan>
+            <div className='user'>
+              <h1> Create Invoice </h1>
+              <p> User </p>
+              <label htmlFor='fullName'> Full Name </label>
+              <Field name='fullName' />
+              <label htmlFor='email'> Email Address </label>
+              <Field name='email' />
+            </div>
+            <div className='address'>
+              <p> Address </p>
+              <label htmlFor='address'> Street Address </label>
+              <Field name='streetAddress' />
+              <label htmlFor='city'> City </label>
+              <Field name='city' />
+              <label htmlFor='state'> Country </label>
+              <Field name='country' />
+              <label htmlFor='zip'> Zip Code </label>
+              <Field name='zipCode' />
+            </div>
+            <div className='button-group'>
+              <button
+                onClick={() => setShowForm((prev) => !prev)}
+                className='discard'
+                type='button'
+              >
+                Discard
+              </button>
+              <button className='create' type='submit'>
+                Create
+              </button>
+            </div>
+          </FormMan>
+        </Formik>
+        {/* <div className='item-list'>
           <p> Item List </p>
           {list.map((key) => {
             return (
               <div key={key} className='item'>
                 <div className='name'>
                   <label htmlFor='name'> Name </label>
-                  <Input type='text' />
+                  <Input
+                    type='text'
+                    name={`name-${key}`}
+                  />
                 </div>
                 <div className='other-info'>
                   <div className='qty'>
@@ -55,7 +109,7 @@ export const Form = ({ setShowForm }: FormProps) => {
                       maxLength={2}
                       min={1}
                       max={99}
-                      type='number'
+                      name={`qty-${key}`}
                     />
                   </div>
                   <div className='price'>
@@ -65,7 +119,7 @@ export const Form = ({ setShowForm }: FormProps) => {
                       maxLength={2}
                       min={1}
                       max={99}
-                      type='number'
+                      name={`price-${key}`}
                     />
                   </div>
                   <div className='delete'>
@@ -89,8 +143,8 @@ export const Form = ({ setShowForm }: FormProps) => {
           >
             Add Item
           </button>
-        </div>
-        <div className='button-group'>
+        </div> */}
+        {/* <div className='button-group'>
           <button
             onClick={() => setShowForm((prev) => !prev)}
             className='discard'
@@ -101,7 +155,7 @@ export const Form = ({ setShowForm }: FormProps) => {
           <button className='create' type='button'>
             Create
           </button>
-        </div>
+        </div> */}
       </div>
     </S.Container>
   )
