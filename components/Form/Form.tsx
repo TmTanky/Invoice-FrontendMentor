@@ -9,7 +9,9 @@ import React, {
 // import { nanoid } from 'nanoid'
 // import { Input } from '../Input'
 import { Formik, Field, Form as FormMan } from 'formik'
+import { ErrorMsg } from '../ErrorMsg'
 import * as S from './Form.styles'
+import { validate } from '../../utils/formik/validate'
 // import { Items } from '../../types/types'
 
 type FormProps = {
@@ -54,25 +56,32 @@ export const Form = ({ setShowForm }: FormProps) => {
           onSubmit={async (values) => {
             console.log(values)
           }}
+          validate={validate}
         >
           <FormMan>
             <div className='user'>
               <h1> Create Invoice </h1>
               <p> User </p>
               <label htmlFor='fullName'> Full Name </label>
-              <Field name='fullName' />
+              <ErrorMsg name='fullName' />
+              <Field type='text' name='fullName' />
               <label htmlFor='email'> Email Address </label>
-              <Field name='email' />
+              <ErrorMsg name='email' />
+              <Field type='email' name='email' />
             </div>
             <div className='address'>
               <p> Address </p>
               <label htmlFor='address'> Street Address </label>
+              <ErrorMsg name='streetAddress' />
               <Field name='streetAddress' />
               <label htmlFor='city'> City </label>
+              <ErrorMsg name='city' />
               <Field name='city' />
               <label htmlFor='state'> Country </label>
+              <ErrorMsg name='country' />
               <Field name='country' />
               <label htmlFor='zip'> Zip Code </label>
+              <ErrorMsg name='zipCode' />
               <Field name='zipCode' />
             </div>
             <div className='button-group'>
