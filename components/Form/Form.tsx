@@ -1,42 +1,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, {
-  Dispatch,
-  SetStateAction,
-  MouseEvent
-  // useState
-} from 'react'
-// import { AiFillDelete } from 'react-icons/ai'
-// import { nanoid } from 'nanoid'
-// import { Input } from '../Input'
-import { Formik, Field, Form as FormMan } from 'formik'
+import React, { Dispatch, SetStateAction, MouseEvent } from 'react'
+import { AiFillDelete } from 'react-icons/ai'
+import { nanoid } from 'nanoid'
+import { Formik, Field, Form as FormMan, FieldArray } from 'formik'
 import { ErrorMsg } from '../ErrorMsg'
 import * as S from './Form.styles'
 import { validate } from '../../utils/formik/validate'
-// import { Items } from '../../types/types'
 
 type FormProps = {
   setShowForm: Dispatch<SetStateAction<boolean>>
 }
 
 export const Form = ({ setShowForm }: FormProps) => {
-  // const [list, setList] = useState<string[]>([])
-  // const [form, setForm] = useState({
-  //   fullName: '',
-  //   email: '',
-  //   streetAddress: '',
-  //   city: '',
-  //   country: '',
-  //   zipCode: ''
-  // })
-  // const [itemList, setItemsList] = useState<Items[]>([])
-
-  // const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-  //   setForm({
-  //     ...form,
-  //     [e.target.name]: e.target.value
-  //   })
-  // }
-
   return (
     <S.Container onClick={() => setShowForm((prev) => !prev)}>
       <div
@@ -51,120 +26,137 @@ export const Form = ({ setShowForm }: FormProps) => {
             streetAddress: '',
             city: '',
             country: '',
-            zipCode: ''
+            zipCode: '',
+            list: [
+              {
+                id: nanoid(6),
+                name: '',
+                qty: '',
+                price: ''
+              }
+            ]
           }}
-          onSubmit={async (values) => {
-            console.log(values)
+          onSubmit={async (values, { resetForm, setValues }) => {
+            const data = await (
+              await fetch('/api/submit', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(values)
+              })
+            ).json()
+            if (data.message === 'success') {
+              resetForm()
+              setValues({
+                fullName: '',
+                email: '',
+                city: '',
+                country: '',
+                streetAddress: '',
+                zipCode: '',
+                list: [
+                  {
+                    id: nanoid(6),
+                    price: '',
+                    qty: '',
+                    name: ''
+                  }
+                ]
+              })
+            }
           }}
           validate={validate}
         >
-          <FormMan>
-            <div className='user'>
-              <h1> Create Invoice </h1>
-              <p> User </p>
-              <label htmlFor='fullName'> Full Name </label>
-              <ErrorMsg name='fullName' />
-              <Field type='text' name='fullName' />
-              <label htmlFor='email'> Email Address </label>
-              <ErrorMsg name='email' />
-              <Field type='email' name='email' />
-            </div>
-            <div className='address'>
-              <p> Address </p>
-              <label htmlFor='address'> Street Address </label>
-              <ErrorMsg name='streetAddress' />
-              <Field name='streetAddress' />
-              <label htmlFor='city'> City </label>
-              <ErrorMsg name='city' />
-              <Field name='city' />
-              <label htmlFor='state'> Country </label>
-              <ErrorMsg name='country' />
-              <Field name='country' />
-              <label htmlFor='zip'> Zip Code </label>
-              <ErrorMsg name='zipCode' />
-              <Field name='zipCode' />
-            </div>
-            <div className='button-group'>
-              <button
-                onClick={() => setShowForm((prev) => !prev)}
-                className='discard'
-                type='button'
-              >
-                Discard
-              </button>
-              <button className='create' type='submit'>
-                Create
-              </button>
-            </div>
-          </FormMan>
-        </Formik>
-        {/* <div className='item-list'>
-          <p> Item List </p>
-          {list.map((key) => {
-            return (
-              <div key={key} className='item'>
-                <div className='name'>
-                  <label htmlFor='name'> Name </label>
-                  <Input
-                    type='text'
-                    name={`name-${key}`}
-                  />
-                </div>
-                <div className='other-info'>
-                  <div className='qty'>
-                    <label htmlFor='qty'> Qty </label>
-                    <Input
-                      minLength={1}
-                      maxLength={2}
-                      min={1}
-                      max={99}
-                      name={`qty-${key}`}
-                    />
-                  </div>
-                  <div className='price'>
-                    <label htmlFor='price'> Price </label>
-                    <Input
-                      minLength={1}
-                      maxLength={2}
-                      min={1}
-                      max={99}
-                      name={`price-${key}`}
-                    />
-                  </div>
-                  <div className='delete'>
-                    <AiFillDelete
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => {
-                        setList((prev) => prev.filter((item) => item !== key))
-                      }}
-                      size={20}
-                    />
-                  </div>
-                </div>
+          {({ values }) => (
+            <FormMan>
+              <div className='user'>
+                <h1> Create Invoice </h1>
+                <p> User </p>
+                <label htmlFor='fullName'> Full Name </label>
+                <ErrorMsg name='fullName' />
+                <Field type='text' name='fullName' />
+                <label htmlFor='email'> Email Address </label>
+                <ErrorMsg name='email' />
+                <Field type='email' name='email' />
               </div>
-            )
-          })}
-          <button
-            onClick={() => {
-              setList((prev) => [...prev, nanoid(10)])
-            }}
-            type='button'
-          >
-            Add Item
-          </button>
-        </div> */}
-        {/* <div className='button-group'>
-          <button
-            onClick={() => setShowForm((prev) => !prev)}
-            className='discard'
-            type='button'
-          >
-            Discard
-          </button>
-          <button className='create' type='button'>
-            Create
-          </button>
-        </div> */}
+              <div className='address'>
+                <p> Address </p>
+                <label htmlFor='address'> Street Address </label>
+                <ErrorMsg name='streetAddress' />
+                <Field name='streetAddress' />
+                <label htmlFor='city'> City </label>
+                <ErrorMsg name='city' />
+                <Field name='city' />
+                <label htmlFor='state'> Country </label>
+                <ErrorMsg name='country' />
+                <Field name='country' />
+                <label htmlFor='zip'> Zip Code </label>
+                <ErrorMsg name='zipCode' />
+                <Field name='zipCode' />
+              </div>
+              <FieldArray name='list'>
+                {({ remove, push }) => (
+                  <div className='item-list'>
+                    <p> Item List </p>
+                    {values.list.map((list, index) => (
+                      <div key={list.id} className='item'>
+                        <div className='name'>
+                          <label htmlFor='name'> Name </label>
+                          <ErrorMsg name={`list.${index}.name`} />
+                          <Field name={`list.${index}.name`} />
+                        </div>
+                        <div className='other-info'>
+                          <div className='qty'>
+                            <label htmlFor='qty'> Qty </label>
+                            <ErrorMsg name={`list.${index}.qty`} />
+                            <Field
+                              error='asdfasdf'
+                              type='number'
+                              name={`list.${index}.qty`}
+                            />
+                          </div>
+                          <div className='price'>
+                            <label htmlFor='price'> Price </label>
+                            <ErrorMsg name={`list.${index}.price`} />
+                            <Field type='number' name={`list.${index}.price`} />
+                          </div>
+                          <div className='delete'>
+                            <AiFillDelete
+                              style={{ cursor: 'pointer' }}
+                              size={20}
+                              onClick={() => remove(index)}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    <button
+                      type='button'
+                      onClick={() =>
+                        push({ name: '', qty: '', price: '', id: nanoid(6) })
+                      }
+                    >
+                      Add Item
+                    </button>
+                  </div>
+                )}
+              </FieldArray>
+              <div className='button-group'>
+                <button
+                  onClick={() => setShowForm((prev) => !prev)}
+                  className='discard'
+                  type='button'
+                >
+                  Discard
+                </button>
+                <button className='create' type='submit'>
+                  Create
+                </button>
+              </div>
+            </FormMan>
+          )}
+        </Formik>
       </div>
     </S.Container>
   )
