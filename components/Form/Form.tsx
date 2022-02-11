@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction, MouseEvent } from 'react'
 import { AiFillDelete } from 'react-icons/ai'
 import { nanoid } from 'nanoid'
 import { Formik, Field, Form as FormMan, FieldArray } from 'formik'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import { ErrorMsg } from '../ErrorMsg'
 import * as S from './Form.styles'
 import { validate } from '../../utils/formik/validate'
@@ -21,7 +21,6 @@ export const Form = ({ setShowForm }: FormProps) => {
         onClick={(e: MouseEvent) => e.stopPropagation()}
         className='form'
       >
-        <ToastContainer />
         <Formik
           initialValues={{
             fullName: '',

@@ -50,6 +50,9 @@ const Home = ({ invoices }: HomeProps) => {
 export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
+  const res = await fetch('http://localhost:3000/api/getInvoices')
+  const data = await res.json()
+  console.log(data)
   return {
     props: {
       invoices: fakeData
