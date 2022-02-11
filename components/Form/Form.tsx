@@ -3,9 +3,11 @@ import React, { Dispatch, SetStateAction, MouseEvent } from 'react'
 import { AiFillDelete } from 'react-icons/ai'
 import { nanoid } from 'nanoid'
 import { Formik, Field, Form as FormMan, FieldArray } from 'formik'
+import { ToastContainer, toast } from 'react-toastify'
 import { ErrorMsg } from '../ErrorMsg'
 import * as S from './Form.styles'
 import { validate } from '../../utils/formik/validate'
+import 'react-toastify/dist/ReactToastify.css'
 
 type FormProps = {
   setShowForm: Dispatch<SetStateAction<boolean>>
@@ -19,6 +21,7 @@ export const Form = ({ setShowForm }: FormProps) => {
         onClick={(e: MouseEvent) => e.stopPropagation()}
         className='form'
       >
+        <ToastContainer />
         <Formik
           initialValues={{
             fullName: '',
@@ -65,6 +68,18 @@ export const Form = ({ setShowForm }: FormProps) => {
                 ]
               })
             }
+            toast('Invoice Submitted', {
+              autoClose: 3000,
+              position: 'bottom-right',
+              style: {
+                color: 'white',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)'
+              },
+              draggable: true,
+              progressStyle: {
+                backgroundColor: 'rgb(20, 22, 37)'
+              }
+            })
           }}
           validate={validate}
         >
