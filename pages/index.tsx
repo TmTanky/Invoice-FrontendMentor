@@ -32,7 +32,7 @@ const Home = ({ invoices }: HomeProps) => {
           <InvoiceItem
             id={item.id}
             key={item.id}
-            name='asdfasdfa'
+            name={item.fullName}
             total={4}
             dueDate={new Date().toLocaleString('en', {
               dateStyle: 'medium'

@@ -26,7 +26,7 @@ export const Form = ({ setShowForm }: FormProps) => {
       >
         <Formik
           initialValues={{
-            id: nanoid(6),
+            id: nanoid(6).toUpperCase(),
             fullName: '',
             email: '',
             streetAddress: '',
@@ -38,7 +38,7 @@ export const Form = ({ setShowForm }: FormProps) => {
               createdAt: dateNow,
               items: [
                 {
-                  id: nanoid(6),
+                  id: nanoid(6).toUpperCase(),
                   name: '',
                   qty: '',
                   price: ''
@@ -59,7 +59,7 @@ export const Form = ({ setShowForm }: FormProps) => {
             if (data.message === 'success') {
               resetForm()
               setValues({
-                id: nanoid(6),
+                id: nanoid(6).toUpperCase(),
                 fullName: '',
                 email: '',
                 city: '',
@@ -71,7 +71,7 @@ export const Form = ({ setShowForm }: FormProps) => {
                   createdAt: '',
                   items: [
                     {
-                      id: '',
+                      id: nanoid(6).toUpperCase(),
                       price: '',
                       qty: '',
                       name: ''
@@ -164,7 +164,12 @@ export const Form = ({ setShowForm }: FormProps) => {
                     <button
                       type='button'
                       onClick={() =>
-                        push({ name: '', qty: '', price: '', id: nanoid(6) })
+                        push({
+                          name: '',
+                          qty: '',
+                          price: '',
+                          id: nanoid(6).toUpperCase()
+                        })
                       }
                     >
                       Add Item
