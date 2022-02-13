@@ -1,10 +1,16 @@
-import { User, Items, Status } from './types'
+import { Items, Status } from './types'
 
 export interface InvoiceType {
   id: string
-  user: User
-  items: Items[]
+  fullName: string
+  email: string
+  city: string
+  country: string
+  zipCode: string
   status: Status
-  dueDate: string
-  total: number
+  dueDate?: string
+  list: {
+    createdAt: string
+    items: Items[]
+  }
 }

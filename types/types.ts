@@ -8,9 +8,9 @@ export type Address = {
 export type Items = {
   id: string
   name: string
-  qty: number
-  price: number
-  total: number
+  qty: number | string
+  price: number | string
+  total: number | string
 }
 
 export type Status = 'paid' | 'pending' | 'draft'

@@ -22,6 +22,12 @@ export const Container = styled.div`
     overflow-y: scroll;
     cursor: default;
 
+    input {
+      padding: 0.5rem;
+      border-radius: 2.5px;
+      border: none;
+    }
+
     .user,
     .address {
       z-index: 40;

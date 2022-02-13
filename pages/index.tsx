@@ -5,7 +5,6 @@ import { InvoiceItem } from '../components/Invoice'
 import { Form } from '../components/Form'
 import { Toolbar } from '../components/Toolbar'
 import * as S from '../components/Pages/Index/Index.styles'
-import { fakeData } from '../data'
 import { InvoiceType } from '../types/interfaces'
 import { filterInvoice } from '../utils'
 
@@ -33,10 +32,12 @@ const Home = ({ invoices }: HomeProps) => {
           <InvoiceItem
             id={item.id}
             key={item.id}
-            name={item.user.name}
-            total={item.total}
-            dueDate={item.dueDate}
-            status={item.status}
+            name={item.fullName}
+            total={4}
+            dueDate={new Date().toLocaleString('en', {
+              dateStyle: 'medium'
+            })}
+            status='paid'
           />
         )
       })}
@@ -50,9 +51,11 @@ const Home = ({ invoices }: HomeProps) => {
 export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
+  const res = await fetch('http://localhost:3000/api/getInvoices')
+  const data = (await res.json()) as { message: string; data: InvoiceType[] }
   return {
     props: {
-      invoices: fakeData
+      invoices: data.data
     }
   }
 }
