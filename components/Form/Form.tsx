@@ -14,6 +14,9 @@ type FormProps = {
 }
 
 export const Form = ({ setShowForm }: FormProps) => {
+  const dateNow = new Date().toLocaleString('en', {
+    dateStyle: 'medium'
+  })
   return (
     <S.Container onClick={() => setShowForm((prev) => !prev)}>
       <div
@@ -23,20 +26,25 @@ export const Form = ({ setShowForm }: FormProps) => {
       >
         <Formik
           initialValues={{
+            id: nanoid(6),
             fullName: '',
             email: '',
             streetAddress: '',
             city: '',
             country: '',
             zipCode: '',
-            list: [
-              {
-                id: nanoid(6),
-                name: '',
-                qty: '',
-                price: ''
-              }
-            ]
+            status: 'pending',
+            list: {
+              createdAt: dateNow,
+              items: [
+                {
+                  id: nanoid(6),
+                  name: '',
+                  qty: '',
+                  price: ''
+                }
+              ]
+            }
           }}
           onSubmit={async (values, { resetForm, setValues }) => {
             const data = await (
@@ -51,20 +59,25 @@ export const Form = ({ setShowForm }: FormProps) => {
             if (data.message === 'success') {
               resetForm()
               setValues({
+                id: nanoid(6),
                 fullName: '',
                 email: '',
                 city: '',
                 country: '',
                 streetAddress: '',
                 zipCode: '',
-                list: [
-                  {
-                    id: nanoid(6),
-                    price: '',
-                    qty: '',
-                    name: ''
-                  }
-                ]
+                status: 'pending',
+                list: {
+                  createdAt: '',
+                  items: [
+                    {
+                      id: '',
+                      price: '',
+                      qty: '',
+                      name: ''
+                    }
+                  ]
+                }
               })
             }
             toast('Invoice Submitted', {
@@ -109,31 +122,34 @@ export const Form = ({ setShowForm }: FormProps) => {
                 <ErrorMsg name='zipCode' />
                 <Field name='zipCode' />
               </div>
-              <FieldArray name='list'>
+              <FieldArray name='list.items'>
                 {({ remove, push }) => (
                   <div className='item-list'>
                     <p> Item List </p>
-                    {values.list.map((list, index) => (
+                    {values.list.items.map((list, index) => (
                       <div key={list.id} className='item'>
                         <div className='name'>
                           <label htmlFor='name'> Name </label>
-                          <ErrorMsg name={`list.${index}.name`} />
-                          <Field name={`list.${index}.name`} />
+                          <ErrorMsg name={`list.items[${index}].name`} />
+                          <Field name={`list.items[${index}].name`} />
                         </div>
                         <div className='other-info'>
                           <div className='qty'>
                             <label htmlFor='qty'> Qty </label>
-                            <ErrorMsg name={`list.${index}.qty`} />
+                            <ErrorMsg name={`list.items[${index}].qty`} />
                             <Field
                               error='asdfasdf'
                               type='number'
-                              name={`list.${index}.qty`}
+                              name={`list.items[${index}].qty`}
                             />
                           </div>
                           <div className='price'>
                             <label htmlFor='price'> Price </label>
-                            <ErrorMsg name={`list.${index}.price`} />
-                            <Field type='number' name={`list.${index}.price`} />
+                            <ErrorMsg name={`list.items[${index}].price`} />
+                            <Field
+                              type='number'
+                              name={`list.items[${index}].price`}
+                            />
                           </div>
                           <div className='delete'>
                             <AiFillDelete

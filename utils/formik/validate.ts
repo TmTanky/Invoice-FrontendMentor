@@ -1,4 +1,5 @@
 type ValuesProps = {
+  id: string
   fullName: string
   email: string
   streetAddress: string
@@ -6,10 +7,14 @@ type ValuesProps = {
   country: string
   zipCode: string
   list: {
-    name: string | number
-    qty: string | number
-    price: string | number
-  }[]
+    createdAt: string
+    items: {
+      id: string
+      name: string | number
+      qty: string | number
+      price: string | number
+    }[]
+  }
 }
 
 export const validate = (values: ValuesProps) => {
@@ -33,12 +38,12 @@ export const validate = (values: ValuesProps) => {
     errors.zipCode = 'Required'
   }
   // check if all items in list are empty
-  if (values.list.length === 0) {
+  if (values.list.items.length === 0) {
     errors.list = 'Required'
   } else {
     // check if all items in list are filled
     const listErrors: any = []
-    values.list.forEach((item, index) => {
+    values.list.items.forEach((item, index) => {
       const itemErrors: any = {}
       if (!item.name) {
         itemErrors.name = 'Required'

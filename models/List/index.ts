@@ -6,4 +6,4 @@ const listSchema = new Schema({
   ]
 })
 
-export const List = model('List', listSchema) || models.List
+export const List = models.List || model('List', listSchema)

@@ -4,45 +4,53 @@ import { User } from '../../models/User'
 import { List } from '../../models/List'
 
 type BodyProps = {
+  id: string
   fullName: string
   email: string
   streetAddress: string
   city: string
   zipCode: string
-  list: [
-    {
+  status: string
+  list: {
+    createdAt: string
+    items: {
       id: string
       name: string
       qty: number
       price: number
-    }
-  ]
+    }[]
+  }
 }
 
 establishConnection()
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  // const dateNow = new Date().toLocaleString('en', {
-  //   dateStyle: 'medium'
-  // })
   const data = req.body as BodyProps
   const totaledData = {
     ...data,
-    list: data.list.map((item) => ({
-      ...item,
-      total: item.qty * item.price
-    }))
+    list: {
+      ...data.list,
+      items: data.list.items.map((item) => ({
+        ...item,
+        total: item.qty * item.price
+      }))
+    }
   }
   const newList = new List({
-    list: totaledData.list
+    list: totaledData.list.items
   })
   const newUser = new User({
+    id: totaledData.id,
     fullName: totaledData.fullName,
     email: totaledData.email,
     streetAddress: totaledData.streetAddress,
     city: totaledData.city,
     zipCode: totaledData.zipCode,
-    list: newList._id
+    status: totaledData.status,
+    list: {
+      createdAt: totaledData.list.createdAt,
+      items: newList._id
+    }
   })
   await newList.save()
   await newUser.save()
