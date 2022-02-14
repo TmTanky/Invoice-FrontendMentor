@@ -13,7 +13,6 @@ type InvoiceItemPageProps = {
 }
 
 const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
-
   const router = useRouter()
 
   return (
@@ -22,13 +21,14 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
         <title> #{invoice.id} | Invoice </title>
       </Head>
       <S.Container>
-        <div className='go-back'>
+        <h1> hello </h1>
+        {/* <div className='go-back'>
           <button className='go-back-btn' onClick={() => router.back()} type='button'> Go back </button>
           <Button status={invoice.status}>
             {invoice.status.toUpperCase()}
           </Button>
         </div>
-        <Info invoice={invoice} />
+        <Info invoice={invoice} /> */}
       </S.Container>
     </div>
   )
@@ -37,9 +37,13 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
 export default InvoiceItemPage
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = fakeData.map((invoice) => ({
-    params: { id: invoice.id }
-  }))
+  const res = await fetch('http://localhost:3000/api/getInvoices')
+  const data = (await res.json()) as { message: string; data: InvoiceType[] }
+  const paths = data.data.map((invoice) => {
+    return {
+      params: { id: invoice.id }
+    }
+  })
 
   return {
     paths,
@@ -49,11 +53,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string }
-  const invoice = fakeData.find((item) => item.id === id)
+  const res = await fetch(`http://localhost:3000/api/getInvoice/${id}`, {
+    method: 'POST',
+    body: JSON.stringify({ id })
+  })
+  const data = (await res.json()) as { message: string; data: InvoiceType }
 
   return {
     props: {
-      invoice
+      invoice: data.data
     }
   }
 }
