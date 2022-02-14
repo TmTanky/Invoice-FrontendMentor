@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import { Info } from '../../components/Invoice/Info/Info'
 import { Button } from '../../components/Button'
 import * as S from '../../components/Pages/Invoice/index.styles'
-import { fakeData } from '../../data'
 import { InvoiceType } from '../../types/interfaces'
 
 type InvoiceItemPageProps = {
@@ -13,7 +12,6 @@ type InvoiceItemPageProps = {
 }
 
 const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
-
   const router = useRouter()
 
   return (
@@ -37,9 +35,13 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
 export default InvoiceItemPage
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = fakeData.map((invoice) => ({
-    params: { id: invoice.id }
-  }))
+  const res = await fetch('http://localhost:3000/api/getInvoices')
+  const data = (await res.json()) as { message: string; data: InvoiceType[] }
+  const paths = data.data.map((invoice) => {
+    return {
+      params: { id: invoice.id }
+    }
+  })
 
   return {
     paths,
@@ -49,11 +51,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string }
-  const invoice = fakeData.find((item) => item.id === id)
+  const res = await fetch(`http://localhost:3000/api/getInvoice`, {
+    method: 'POST',
+    body: JSON.stringify({ id })
+  })
+  const data = (await res.json()) as { message: string; data: InvoiceType }
 
   return {
     props: {
-      invoice
+      invoice: data.data
     }
   }
 }

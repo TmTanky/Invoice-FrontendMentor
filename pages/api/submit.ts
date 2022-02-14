@@ -36,6 +36,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }))
     }
   }
+  console.log(totaledData)
   const newList = new List({
     list: totaledData.list.items
   })

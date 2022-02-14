@@ -4,6 +4,7 @@ export interface InvoiceType {
   id: string
   fullName: string
   email: string
+  streetAddress: string
   city: string
   country: string
   zipCode: string
@@ -11,6 +12,9 @@ export interface InvoiceType {
   dueDate?: string
   list: {
     createdAt: string
-    items: Items[]
+    items: {
+      _id: string
+      list: Items[]
+    }
   }
 }
