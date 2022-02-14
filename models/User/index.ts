@@ -4,6 +4,7 @@ const userSchema = new Schema({
   id: String,
   fullName: String,
   email: String,
+  streetAddress: String,
   city: String,
   country: String,
   zipCode: String,

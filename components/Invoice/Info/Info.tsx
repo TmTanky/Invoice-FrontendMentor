@@ -6,32 +6,38 @@ type InfoProps = {
   invoice: InvoiceType
 }
 
-export const Info = ({ invoice: { id, user, dueDate, items } }: InfoProps) => {
-  const { address, email } = user
-  const total = items.reduce((acc, curr) => acc + curr.total, 0)
+export const Info = ({ invoice }: InfoProps) => {
+  const total = invoice.list.items.list.reduce(
+    (acc, curr) => acc + (curr.total as number),
+    0
+  )
 
   return (
     <S.Container>
       <div className='upper'>
         <div className='left'>
-          <h2> #{id} </h2>
+          <h2> #{invoice.id} </h2>
         </div>
         <div className='right'>
-          <p> {address.street} </p>
-          <p> {address.city} </p>
-          <p> {address.country} </p>
-          <p> {address.postCode} </p>
+          <p> {invoice.streetAddress} </p>
+          <p> {invoice.city} </p>
+          <p> {invoice.country} </p>
+          <p> {invoice.zipCode} </p>
         </div>
       </div>
 
       <div className='middle'>
         <div className='left'>
           <p> Payment Due </p>
-          <h4> {dueDate} </h4>
+          <h4>
+            {new Date(invoice.list.createdAt).toLocaleString('en', {
+              dateStyle: 'medium'
+            })}
+          </h4>
         </div>
         <div className='right'>
           <p> Sent to </p>
-          <h4> {email} </h4>
+          <h4> {invoice.email} </h4>
         </div>
       </div>
 
@@ -55,7 +61,7 @@ export const Info = ({ invoice: { id, user, dueDate, items } }: InfoProps) => {
           </div>
         </div>
         <div className='items'>
-          {items.map((item) => {
+          {invoice.list.items.list.map((item) => {
             return (
               <div className='item' key={item.id}>
                 <div className='left'>

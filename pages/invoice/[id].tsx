@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import { Info } from '../../components/Invoice/Info/Info'
 import { Button } from '../../components/Button'
 import * as S from '../../components/Pages/Invoice/index.styles'
-import { fakeData } from '../../data'
 import { InvoiceType } from '../../types/interfaces'
 
 type InvoiceItemPageProps = {
@@ -21,14 +20,13 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
         <title> #{invoice.id} | Invoice </title>
       </Head>
       <S.Container>
-        <h1> hello </h1>
-        {/* <div className='go-back'>
+        <div className='go-back'>
           <button className='go-back-btn' onClick={() => router.back()} type='button'> Go back </button>
           <Button status={invoice.status}>
             {invoice.status.toUpperCase()}
           </Button>
         </div>
-        <Info invoice={invoice} /> */}
+        <Info invoice={invoice} />
       </S.Container>
     </div>
   )
@@ -53,7 +51,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string }
-  const res = await fetch(`http://localhost:3000/api/getInvoice/${id}`, {
+  const res = await fetch(`http://localhost:3000/api/getInvoice`, {
     method: 'POST',
     body: JSON.stringify({ id })
   })
