@@ -13,11 +13,11 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <div>
       <S.RootContainer>
-        <div className='left'>
-          <Sidebar />
-          {showForm && <Form setShowForm={setShowForm} />}
-        </div>
-        <div className='right'>{children}</div>
+        {/* <div className='left'> */}
+        <Sidebar />
+        {showForm && <Form setShowForm={setShowForm} />}
+        {/* </div> */}
+        {children}
       </S.RootContainer>
     </div>
   )

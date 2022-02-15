@@ -13,7 +13,8 @@ export const Container = styled.div`
   .form {
     position: relative;
     z-index: 30;
-    background-color: rgb(20, 22, 37);
+    /* background-color: rgb(20, 22, 37); */
+    background-color: red;
     width: 100%;
     height: 100%;
     max-width: 750px;
@@ -34,7 +35,7 @@ export const Container = styled.div`
       position: relative;
       display: flex;
       flex-direction: column;
-      margin: 60px 50px 40px 130px;
+      margin: 60px 50px;
       color: white;
 
       h1 {

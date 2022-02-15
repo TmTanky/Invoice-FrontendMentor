@@ -9,6 +9,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   top: 0;
+  left: 0;
   z-index: 100;
   position: fixed;
 
