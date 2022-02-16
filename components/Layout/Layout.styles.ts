@@ -9,7 +9,7 @@ export const RootContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
 /* 
   .right {
     width: 100%;

@@ -17,7 +17,7 @@ export const Layout = ({ children }: LayoutProps) => {
         <Sidebar />
         {showForm && <Form setShowForm={setShowForm} />}
         {/* </div> */}
-        {children}
+        {children} 
       </S.RootContainer>
     </div>
   )

@@ -37,7 +37,7 @@ const Home = ({ invoices }: HomeProps) => {
             dueDate={new Date().toLocaleString('en', {
               dateStyle: 'medium'
             })}
-            status='paid'
+            status={item.status}
           />
         )
       })}
