@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { GetStaticProps } from 'next'
+import { AnimatePresence } from 'framer-motion'
 import Head from 'next/head'
 import { InvoiceItem } from '../components/Invoice'
 import { Form } from '../components/Form'
@@ -26,7 +27,11 @@ const Home = ({ invoices }: HomeProps) => {
         setShowForm={setShowForm}
         invoiceTotal={invoices.length}
       />
-      {showForm && <Form setShowForm={setShowForm} />}
+      {showForm && (
+        <AnimatePresence exitBeforeEnter initial={showForm}>
+          <Form setShowForm={setShowForm} />
+        </AnimatePresence>
+      )}
       {filterInvoice(invoices, filter).map((item) => {
         return (
           <InvoiceItem
