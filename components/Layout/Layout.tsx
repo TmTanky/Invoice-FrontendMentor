@@ -1,4 +1,5 @@
 import React, { ReactNode, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import { Sidebar } from '../Sidebar'
 import { Form } from '../Form'
 import * as S from './Layout.styles'
@@ -13,11 +14,18 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <div>
       <S.RootContainer>
-        <div className='left'>
+        {/* <div className='left'> */}
+        <div className='first-section'>
           <Sidebar />
-          {showForm && <Form setShowForm={setShowForm} />}
         </div>
-        <div className='right'>{children}</div>
+        {showForm && (
+          <AnimatePresence>
+            <Form setShowForm={setShowForm} />
+          </AnimatePresence>
+        )}
+        {/* {showForm && <Form setShowForm={setShowForm} />} */}
+        {/* </div> */}
+        <div className='second-section'>{children}</div>
       </S.RootContainer>
     </div>
   )

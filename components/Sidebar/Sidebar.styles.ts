@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   background-color: rgb(30, 33, 57);
+  /* background-color: transparent; */
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   width: 80px;
@@ -9,10 +10,11 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   top: 0;
+  left: 0;
   z-index: 100;
   position: fixed;
 
-  @media screen and (min-width: 300px) and (max-width: 650px) {
+  @media screen and (min-width: 300px) and (max-width: 800px) {
     height: 80px;
     width: 100vw;
     flex-direction: row;
@@ -27,7 +29,7 @@ export const UpperContainer = styled.div`
   @media screen and (min-width: 300px) and (max-width: 450px) {
     flex: 1;
   }
-  @media screen and (min-width: 451px) and (max-width: 650px) {
+  @media screen and (min-width: 451px) and (max-width: 800px) {
     flex: 2;
   }
 
@@ -51,7 +53,7 @@ export const LowerContainter = styled.div`
   /* display: flex;
   flex-direction: column;
   justify-content: space-evenly; */
-  @media screen and (max-width: 650px) {
+  @media screen and (max-width: 800px) {
     flex-direction: row;
   }
 `
@@ -66,7 +68,7 @@ export const ThemeToggle = styled.div`
   align-items: center;
   border-bottom: solid 1px gray;
   
-  @media screen and (min-width: 300px) and (max-width: 650px) {
+  @media screen and (min-width: 300px) and (max-width: 800px) {
     border-bottom: none;
   }
 `

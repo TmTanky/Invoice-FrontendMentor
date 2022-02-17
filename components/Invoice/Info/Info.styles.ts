@@ -5,8 +5,7 @@ export const Container = styled.div`
   width: 100%;
   max-width: 700px;
   background-color: rgb(30, 33, 57);
-  margin: 0 15px;
-  margin-top: 20px;
+  margin: 20px 15px;
   padding: 1.5rem;
   height: max-content;
   border-radius: 5px;
@@ -24,7 +23,9 @@ export const Container = styled.div`
     .right {
       flex: 1;
       display: flex;
+      flex-direction: column;
       align-items: flex-end;
+      text-align: right;
     }
   }
 
@@ -46,12 +47,13 @@ export const Container = styled.div`
       flex: 1;
       display: flex;
       align-items: flex-end;
+      flex-direction: column;
     }
 
     @media screen and (min-width: 300px) and (max-width: 650px) {
       flex-direction: column;
       .right {
-          margin-top: 10px;
+        margin-top: 10px;
         align-items: flex-start;
       }
     }

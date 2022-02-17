@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 20px;
+  background-color: rgb(20, 22, 37);
 
   .go-back {
     color: white;
