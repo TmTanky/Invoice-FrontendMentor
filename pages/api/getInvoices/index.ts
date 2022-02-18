@@ -6,12 +6,9 @@ import { establishConnection } from '../../../lib/mongo'
 establishConnection()
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  redisClient.on('error', (err) => err)
-  await redisClient.connect()
-  const cache = await redisClient.get('allInvoices')
+  const cache = await redisClient().get('allInvoices')
 
   if (cache) {
-    console.log(JSON.parse(cache))
     return res.send({
       message: 'success',
       type: 'redis',
@@ -20,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const allInvoice = await User.find()
-  await redisClient.set('allInvoices', JSON.stringify(allInvoice), {
+  await redisClient().set('allInvoices', JSON.stringify(allInvoice), {
     EX: 10800
   })
   return res.send({

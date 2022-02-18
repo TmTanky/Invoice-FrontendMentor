@@ -62,7 +62,6 @@ export const getStaticProps: GetStaticProps = async () => {
     data: InvoiceType[]
     type: string
   }
-  console.log(data.type)
   return {
     props: {
       invoices: data.data
