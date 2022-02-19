@@ -1,14 +1,29 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { User } from '../../../models/User'
+import { redisClient } from '../../../lib/redis'
 import { establishConnection } from '../../../lib/mongo'
 
 establishConnection()
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const allInvoice = await User.find()
-  res.send({
+  const cache = await redisClient().get('allInvoices')
+
+  if (cache) {
+    return res.status(200).send({
+      message: 'success',
+      type: 'redis',
+      data: JSON.parse(cache)
+    })
+  }
+
+  const allInvoices = await User.find()
+  await redisClient().set('allInvoices', JSON.stringify(allInvoices), {
+    EX: 10800
+  })
+  return res.status(200).send({
     message: 'success',
-    data: allInvoice
+    type: 'mongo',
+    data: allInvoices
   })
 }
 

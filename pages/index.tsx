@@ -57,7 +57,11 @@ export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
   const res = await fetch('http://localhost:3000/api/getInvoices')
-  const data = (await res.json()) as { message: string; data: InvoiceType[] }
+  const data = (await res.json()) as {
+    message: string
+    data: InvoiceType[]
+    type: string
+  }
   return {
     props: {
       invoices: data.data
