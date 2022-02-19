@@ -21,7 +21,14 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
       </Head>
       <S.Container>
         <div className='go-back'>
-          <button className='go-back-btn' onClick={() => router.back()} type='button'> Go back </button>
+          <button
+            className='go-back-btn'
+            onClick={() => router.back()}
+            type='button'
+          >
+            {' '}
+            Go back{' '}
+          </button>
           <Button status={invoice.status}>
             {invoice.status.toUpperCase()}
           </Button>
@@ -55,8 +62,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     method: 'POST',
     body: JSON.stringify({ id })
   })
-  const data = (await res.json()) as { message: string; data: InvoiceType }
-
+  const data = (await res.json()) as {
+    message: string
+    data: InvoiceType
+    type: string
+  }
   return {
     props: {
       invoice: data.data

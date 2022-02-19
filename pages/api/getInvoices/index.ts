@@ -9,7 +9,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const cache = await redisClient().get('allInvoices')
 
   if (cache) {
-    return res.send({
+    return res.status(200).send({
       message: 'success',
       type: 'redis',
       data: JSON.parse(cache)
@@ -20,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await redisClient().set('allInvoices', JSON.stringify(allInvoice), {
     EX: 10800
   })
-  return res.send({
+  return res.status(200).send({
     message: 'success',
     type: 'mongo',
     data: allInvoice
