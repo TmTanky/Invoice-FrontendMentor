@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { redisClient } from '../../lib/redis'
 import { establishConnection } from '../../lib/mongo'
 import { User } from '../../models/User'
 import { List } from '../../models/List'
@@ -54,6 +55,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   })
   await newList.save()
   await newUser.save()
+  const allInvoices = await User.find()
+  await redisClient().set('allInvoices', JSON.stringify(allInvoices), {
+    EX: 10800
+  })
   res.send({
     message: 'success'
   })

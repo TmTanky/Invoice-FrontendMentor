@@ -16,14 +16,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     })
   }
 
-  const allInvoice = await User.find()
-  await redisClient().set('allInvoices', JSON.stringify(allInvoice), {
+  const allInvoices = await User.find()
+  await redisClient().set('allInvoices', JSON.stringify(allInvoices), {
     EX: 10800
   })
   return res.status(200).send({
     message: 'success',
     type: 'mongo',
-    data: allInvoice
+    data: allInvoices
   })
 }
 
