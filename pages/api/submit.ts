@@ -55,7 +55,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   })
   await newList.save()
   await newUser.save()
-  const allInvoices = await User.find()
+  const allInvoices = await User.find().populate({
+    path: 'list',
+    populate: {
+      path: 'items',
+      model: List
+    }
+  })
   await redisClient().set('allInvoices', JSON.stringify(allInvoices), {
     EX: 10800
   })

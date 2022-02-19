@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { List } from '../../../models/List'
 import { User } from '../../../models/User'
 import { redisClient } from '../../../lib/redis'
 import { establishConnection } from '../../../lib/mongo'
@@ -16,7 +17,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     })
   }
 
-  const allInvoices = await User.find()
+  const allInvoices = await User.find().populate({
+    path: 'list',
+    populate: {
+      path: 'items',
+      model: List
+    }
+  })
   await redisClient().set('allInvoices', JSON.stringify(allInvoices), {
     EX: 10800
   })

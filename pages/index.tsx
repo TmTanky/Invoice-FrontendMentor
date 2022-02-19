@@ -38,8 +38,11 @@ const Home = ({ invoices }: HomeProps) => {
             id={item.id}
             key={item.id}
             name={item.fullName}
-            total={4}
-            dueDate={new Date().toLocaleString('en', {
+            total={item.list.items.list.reduce(
+              (acc, curr) => acc + (curr.total as number),
+              0
+            )}
+            dueDate={new Date(item.list.createdAt).toLocaleString('en', {
               dateStyle: 'medium'
             })}
             status={item.status}

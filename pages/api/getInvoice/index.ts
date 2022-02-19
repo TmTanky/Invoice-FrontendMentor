@@ -25,7 +25,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       model: List
     }
   })
-  await redisClient().set('invoice', JSON.stringify(invoice), {
+  await redisClient().set(`invoice-${id}`, JSON.stringify(invoice), {
     EX: 10800
   })
   return res.send({

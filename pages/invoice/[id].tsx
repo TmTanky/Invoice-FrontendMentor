@@ -26,8 +26,7 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
             onClick={() => router.back()}
             type='button'
           >
-            {' '}
-            Go back{' '}
+            Go back
           </button>
           <Button status={invoice.status}>
             {invoice.status.toUpperCase()}
