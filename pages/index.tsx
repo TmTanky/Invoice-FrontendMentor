@@ -69,10 +69,6 @@ const Home = ({ invoices }: HomeProps) => {
 
 export default Home
 
-// Home.defaultProps = {
-//   invoices: []
-// }
-
 export const getStaticProps: GetStaticProps = async () => {
   const res = await fetch('http://localhost:3000/api/getInvoices')
   const data = (await res.json()) as {

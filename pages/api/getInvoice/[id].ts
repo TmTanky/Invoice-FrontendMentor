@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   //   })
   // }
 
-  const { id } = JSON.parse(req.body) as { id: string }
+  const { id } = req.query as { id: string }
   const invoice = await User.findOne({ id }).populate({
     path: 'list',
     populate: {
