@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { redisClient } from '../../lib/redis'
-import { establishConnection } from '../../lib/mongo'
-import { User } from '../../models/User'
-import { List } from '../../models/List'
+import { redisClient } from '@/lib/redis'
+import { establishConnection } from '@/lib/mongo'
+import { User } from '@/models/User'
+import { List } from '@/models/List'
 
 type BodyProps = {
   id: string

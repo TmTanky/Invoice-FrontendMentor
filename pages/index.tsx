@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { GetStaticProps } from 'next'
-import { AnimatePresence } from 'framer-motion'
 import Head from 'next/head'
-import { InvoiceItem } from '../components/Invoice'
-import { Form } from '../components/Form'
-import { Toolbar } from '../components/Toolbar'
-import * as S from '../components/Pages/Index/Index.styles'
-import { InvoiceType } from '../types/interfaces'
+import { AnimatePresence } from 'framer-motion'
+import { InvoiceItem } from '@/components/Invoice'
+import { Form } from '@/components/Form'
+import { Toolbar } from '@/components/Toolbar'
+import * as S from '@/components/Pages/Index/Index.styles'
+import { InvoiceType } from '@/types/interfaces'
 import { filterInvoice } from '../utils'
 
 type HomeProps = {

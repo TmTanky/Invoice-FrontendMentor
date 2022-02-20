@@ -2,10 +2,10 @@ import React from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { Info } from '../../components/Invoice/Info/Info'
-import { Button } from '../../components/Button'
-import * as S from '../../components/Pages/Invoice/index.styles'
-import { InvoiceType } from '../../types/interfaces'
+import { Info } from '@/components/Invoice/Info/Info'
+import { Button } from '@/components/Button'
+import * as S from '@/components/Pages/Invoice/index.styles'
+import { InvoiceType } from '@/types/interfaces'
 
 type InvoiceItemPageProps = {
   invoice: InvoiceType
