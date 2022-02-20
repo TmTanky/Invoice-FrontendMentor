@@ -1,6 +1,14 @@
 import styled from 'styled-components'
 
-export const LoadingSpinner = styled.div`
+const Container = styled.div`
+  background-color: rgb(20, 22, 37);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const LoadingSpinner = styled.div`
   height: 40px;
   width: 40px;
   border: 4px solid rgb(30, 33, 57);
@@ -17,3 +25,11 @@ export const LoadingSpinner = styled.div`
   }
   animation: spin 1s linear infinite;
 `
+
+export const Loader = () => {
+  return (
+    <Container>
+      <LoadingSpinner />
+    </Container>
+  )
+}
