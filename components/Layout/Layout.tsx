@@ -14,7 +14,6 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <div>
       <S.RootContainer>
-        {/* <div className='left'> */}
         <div className='first-section'>
           <Sidebar />
         </div>
@@ -23,8 +22,6 @@ export const Layout = ({ children }: LayoutProps) => {
             <Form setShowForm={setShowForm} />
           </AnimatePresence>
         )}
-        {/* {showForm && <Form setShowForm={setShowForm} />} */}
-        {/* </div> */}
         <div className='second-section'>{children}</div>
       </S.RootContainer>
     </div>

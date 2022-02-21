@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { AnimatePresence } from 'framer-motion'
@@ -9,6 +9,7 @@ import { Form } from '@/components/Form'
 import { Toolbar } from '@/components/Toolbar'
 import * as S from '@/components/Pages/Index/Index.styles'
 import { InvoiceType } from '@/types/interfaces'
+import { FormContextType, FormContext } from 'contexts/formContext'
 import { filterInvoice, fetcher } from '../utils'
 
 type HomeProps = {
@@ -16,7 +17,7 @@ type HomeProps = {
 }
 
 const Home = ({ invoices }: HomeProps) => {
-  const [showForm, setShowForm] = useState(false)
+  const { showForm, setShowForm } = useContext<FormContextType>(FormContext)
   const [filter, setFilter] = useState('')
   const { data } = useSWR<{ data: InvoiceType[] }>(
     '/api/getInvoices',
