@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import { Info } from '@/components/Invoice/Info/Info'
 import { Button } from '@/components/Button'
+import { Options } from '@/components/Invoice/Options/Options'
 import * as S from '@/components/Pages/Invoice/index.styles'
 import { Loader } from '@/components/Spinner'
 import { InvoiceType } from '@/types/interfaces'
@@ -45,6 +46,7 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
           </Button>
         </div>
         <Info invoice={data.data} />
+        <Options />
       </S.Container>
     </div>
   )

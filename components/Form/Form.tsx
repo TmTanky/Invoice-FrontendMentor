@@ -2,6 +2,7 @@
 import React, { Dispatch, SetStateAction, MouseEvent } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { AiFillDelete } from 'react-icons/ai'
+import { useSWRConfig } from 'swr'
 import { nanoid } from 'nanoid'
 import { Formik, Field, Form as FormMan, FieldArray } from 'formik'
 import { toast } from 'react-toastify'
@@ -15,6 +16,7 @@ type FormProps = {
 }
 
 export const Form = ({ setShowForm }: FormProps) => {
+  const { mutate } = useSWRConfig()
   const dateNow = new Date().toLocaleString('en', {
     dateStyle: 'medium'
   })
@@ -93,6 +95,7 @@ export const Form = ({ setShowForm }: FormProps) => {
                       ]
                     }
                   })
+                  mutate('/api/getInvoices')
                 }
                 toast('Invoice Submitted', {
                   autoClose: 3000,
