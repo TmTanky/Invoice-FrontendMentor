@@ -7,7 +7,7 @@ import { Formik, Field, Form as FormMan, FieldArray } from 'formik'
 import { ErrorMsg } from '@/components/ErrorMsg'
 import { FormContext, FormContextType } from '@/contexts/formContext'
 import * as S from './Form.styles'
-import { validate, initialValues, onSubmitObject } from '../../utils'
+import { validate, initialValues, createOrEditInvoice } from '../../utils'
 import 'react-toastify/dist/ReactToastify.css'
 
 type FormProps = {
@@ -42,13 +42,13 @@ export const Form = ({ setShowForm }: FormProps) => {
           >
             <Formik
               initialValues={toBeEdited ? editForm : initialValues}
-              onSubmit={onSubmitObject}
+              onSubmit={createOrEditInvoice(toBeEdited ? 'edit' : 'create')}
               validate={validate}
             >
               {({ values }) => (
                 <FormMan>
                   <div className='user'>
-                    <h1> Create Invoice </h1>
+                    <h1> {toBeEdited ? 'Edit' : 'Create'} Invoice </h1>
                     <p> User </p>
                     <label htmlFor='fullName'> Full Name </label>
                     <ErrorMsg name='fullName' />

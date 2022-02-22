@@ -29,8 +29,8 @@ type BodyProps = {
 establishConnection()
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method === ('GET' || 'PATCH')) return res.status(405).end()
   const data = req.body as BodyProps
-  console.log(data)
   const totaledData = {
     ...data,
     list: {
@@ -41,7 +41,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }))
     }
   }
-  const newList = new List({
+  if (req.method === 'POST') {
+    const newList = new List({
     list: totaledData.list.items
   })
   const newUser = new User({
@@ -49,6 +50,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     fullName: totaledData.fullName,
     email: totaledData.email,
     streetAddress: totaledData.streetAddress,
+    country: totaledData.country,
     city: totaledData.city,
     zipCode: totaledData.zipCode,
     status: totaledData.status,
@@ -69,8 +71,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // await redisClient().set('allInvoices', JSON.stringify(allInvoices), {
   //   EX: 10800
   // })
-  res.send({
+  return res.send({
     message: 'success'
+  })
+  }
+  console.log(totaledData)
+  return res.send({
+    message: 'edit success'
   })
 }
 
