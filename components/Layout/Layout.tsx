@@ -1,5 +1,6 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useContext } from 'react'
 import { AnimatePresence } from 'framer-motion'
+import { FormContext, FormContextType } from 'contexts'
 import { Sidebar } from '../Sidebar'
 import { Form } from '../Form'
 import * as S from './Layout.styles'
@@ -9,7 +10,7 @@ type LayoutProps = {
 }
 
 export const Layout = ({ children }: LayoutProps) => {
-  const [showForm, setShowForm] = useState(false)
+  const { showForm, setShowForm } = useContext<FormContextType>(FormContext)
 
   return (
     <div>

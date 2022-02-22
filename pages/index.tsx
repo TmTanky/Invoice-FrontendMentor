@@ -9,7 +9,7 @@ import { Form } from '@/components/Form'
 import { Toolbar } from '@/components/Toolbar'
 import * as S from '@/components/Pages/Index/Index.styles'
 import { InvoiceType } from '@/types/interfaces'
-import { FormContextType, FormContext } from 'contexts/formContext'
+import { FormContextType, FormContext } from 'contexts'
 import { filterInvoice, fetcher } from '../utils'
 
 type HomeProps = {

@@ -13,6 +13,7 @@ type BodyProps = {
   streetAddress: string
   city: string
   zipCode: string
+  country: string
   status: string
   list: {
     createdAt: string
@@ -29,6 +30,7 @@ establishConnection()
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const data = req.body as BodyProps
+  console.log(data)
   const totaledData = {
     ...data,
     list: {

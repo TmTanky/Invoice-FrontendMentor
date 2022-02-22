@@ -1,9 +1,9 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { FormProvider } from 'contexts/formContext'
 import { ThemeProvider } from 'styled-components'
 import { ToastContainer } from 'react-toastify'
 import { Layout } from '@/components/Layout'
+import { FormProvider } from 'contexts'
 import { darkTheme } from '../styles/theme/theme'
 
 function MyApp({ Component, pageProps }: AppProps) {

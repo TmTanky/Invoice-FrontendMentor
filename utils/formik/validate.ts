@@ -1,4 +1,4 @@
-type ValuesProps = {
+export type ValuesProps = {
   id: string
   fullName: string
   email: string

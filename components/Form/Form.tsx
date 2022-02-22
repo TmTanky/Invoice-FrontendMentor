@@ -1,14 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { Dispatch, SetStateAction, MouseEvent } from 'react'
+import React, { Dispatch, SetStateAction, MouseEvent, useContext } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { AiFillDelete } from 'react-icons/ai'
-import { useSWRConfig } from 'swr'
 import { nanoid } from 'nanoid'
 import { Formik, Field, Form as FormMan, FieldArray } from 'formik'
-import { toast } from 'react-toastify'
-import { ErrorMsg } from '../ErrorMsg'
+import { ErrorMsg } from '@/components/ErrorMsg'
+import { FormContext, FormContextType } from '@/contexts/formContext'
 import * as S from './Form.styles'
-import { validate } from '../../utils/formik/validate'
+import { validate, initialValues, onSubmitObject } from '../../utils'
 import 'react-toastify/dist/ReactToastify.css'
 
 type FormProps = {
@@ -16,10 +15,8 @@ type FormProps = {
 }
 
 export const Form = ({ setShowForm }: FormProps) => {
-  const { mutate } = useSWRConfig()
-  const dateNow = new Date().toLocaleString('en', {
-    dateStyle: 'medium'
-  })
+  const { editForm, toBeEdited, setToBeEdited } =
+    useContext<FormContextType>(FormContext)
   return (
     <AnimatePresence>
       <S.Container
@@ -27,7 +24,10 @@ export const Form = ({ setShowForm }: FormProps) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        onClick={() => setShowForm((prev) => !prev)}
+        onClick={() => {
+          if (toBeEdited) setToBeEdited('')
+          setShowForm((prev) => !prev)
+        }}
       >
         <div
           aria-hidden='true'
@@ -41,75 +41,8 @@ export const Form = ({ setShowForm }: FormProps) => {
             exit={{ backgroundColor: 'red' }}
           >
             <Formik
-              initialValues={{
-                id: nanoid(6).toUpperCase(),
-                fullName: '',
-                email: '',
-                streetAddress: '',
-                city: '',
-                country: '',
-                zipCode: '',
-                status: 'pending',
-                list: {
-                  createdAt: dateNow,
-                  items: [
-                    {
-                      id: nanoid(6).toUpperCase(),
-                      name: '',
-                      qty: '',
-                      price: ''
-                    }
-                  ]
-                }
-              }}
-              onSubmit={async (values, { resetForm, setValues }) => {
-                const data = await (
-                  await fetch('/api/submit', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(values)
-                  })
-                ).json()
-                if (data.message === 'success') {
-                  resetForm()
-                  setValues({
-                    id: nanoid(6).toUpperCase(),
-                    fullName: '',
-                    email: '',
-                    city: '',
-                    country: '',
-                    streetAddress: '',
-                    zipCode: '',
-                    status: 'pending',
-                    list: {
-                      createdAt: '',
-                      items: [
-                        {
-                          id: nanoid(6).toUpperCase(),
-                          price: '',
-                          qty: '',
-                          name: ''
-                        }
-                      ]
-                    }
-                  })
-                  mutate('/api/getInvoices')
-                }
-                toast('Invoice Submitted', {
-                  autoClose: 3000,
-                  position: 'bottom-right',
-                  style: {
-                    color: 'white',
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)'
-                  },
-                  draggable: true,
-                  progressStyle: {
-                    backgroundColor: 'rgb(20, 22, 37)'
-                  }
-                })
-              }}
+              initialValues={toBeEdited ? editForm : initialValues}
+              onSubmit={onSubmitObject}
               validate={validate}
             >
               {({ values }) => (
@@ -196,7 +129,10 @@ export const Form = ({ setShowForm }: FormProps) => {
                   </FieldArray>
                   <div className='button-group'>
                     <button
-                      onClick={() => setShowForm((prev) => !prev)}
+                      onClick={() => {
+                        if (toBeEdited) setToBeEdited('')
+                        setShowForm((prev) => !prev)
+                      }}
                       className='discard'
                       type='button'
                     >

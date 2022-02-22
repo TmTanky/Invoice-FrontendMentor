@@ -20,7 +20,8 @@
       "@/models/*": ["models/*"],
       "@/hooks/*": ["hooks/*"],
       "@/lib/*": ["lib/*"],
-      "@/types/*": ["types/*"]
+      "@/types/*": ["types/*"],
+      "@/contexts/*": ["contexts/*"]
     }
   },
   "include": [
