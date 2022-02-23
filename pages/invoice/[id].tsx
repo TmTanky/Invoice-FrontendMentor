@@ -46,7 +46,7 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
           </Button>
         </div>
         <Info invoice={data.data} />
-        <Options invoice={invoice} id={data.data._id} listID={data.data.list.items._id} />
+        <Options invoice={data.data} id={data.data._id} listID={data.data.list.items._id} />
       </S.Container>
     </div>
   )

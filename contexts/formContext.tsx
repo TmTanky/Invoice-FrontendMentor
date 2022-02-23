@@ -19,12 +19,15 @@ export type FormContextType = {
   setShowForm: Dispatch<SetStateAction<boolean>>
   editForm: ValuesProps
   setEditForm: Dispatch<SetStateAction<ValuesProps>>
-  toBeEdited: string
-  setToBeEdited: Dispatch<SetStateAction<string>>
+  id: string
+  setId: Dispatch<SetStateAction<string>>
+  listId: string
+  setListId: Dispatch<SetStateAction<string>>
 }
 
 export const FormProvider = ({ children }: FormContextProps) => {
-  const [toBeEdited, setToBeEdited] = useState('')
+  const [id, setId] = useState('')
+  const [listId, setListId] = useState('')
   const [showForm, setShowForm] = useState(false)
   const [editForm, setEditForm] = useState({
     id: '',
@@ -55,8 +58,10 @@ export const FormProvider = ({ children }: FormContextProps) => {
         setShowForm,
         editForm,
         setEditForm,
-        setToBeEdited,
-        toBeEdited
+        setId,
+        id,
+        listId,
+        setListId
       }}
     >
       {children}

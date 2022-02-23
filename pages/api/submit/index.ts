@@ -7,6 +7,8 @@ import { User } from '@/models/User'
 import { List } from '@/models/List'
 
 type BodyProps = {
+  userID?: string
+  listID: string
   id: string
   fullName: string
   email: string
@@ -30,7 +32,9 @@ establishConnection()
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === ('GET' || 'PATCH')) return res.status(405).end()
+
   const data = req.body as BodyProps
+  console.log(data)
   const totaledData = {
     ...data,
     list: {
@@ -43,39 +47,52 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
   if (req.method === 'POST') {
     const newList = new List({
+      list: totaledData.list.items
+    })
+    const newUser = new User({
+      id: totaledData.id,
+      fullName: totaledData.fullName,
+      email: totaledData.email,
+      streetAddress: totaledData.streetAddress,
+      country: totaledData.country,
+      city: totaledData.city,
+      zipCode: totaledData.zipCode,
+      status: totaledData.status,
+      list: {
+        createdAt: totaledData.list.createdAt,
+        items: newList._id
+      }
+    })
+    await newList.save()
+    await newUser.save()
+    // const allInvoices = await User.find().populate({
+    //   path: 'list',
+    //   populate: {
+    //     path: 'items',
+    //     model: List
+    //   }
+    // })
+    // await redisClient().set('allInvoices', JSON.stringify(allInvoices), {
+    //   EX: 10800
+    // })
+    return res.send({
+      message: 'success'
+    })
+  }
+
+  await List.findByIdAndUpdate(data.listID, {
     list: totaledData.list.items
   })
-  const newUser = new User({
-    id: totaledData.id,
+  await User.findByIdAndUpdate(data.userID, {
     fullName: totaledData.fullName,
     email: totaledData.email,
     streetAddress: totaledData.streetAddress,
     country: totaledData.country,
     city: totaledData.city,
     zipCode: totaledData.zipCode,
-    status: totaledData.status,
-    list: {
-      createdAt: totaledData.list.createdAt,
-      items: newList._id
-    }
+    status: totaledData.status
   })
-  await newList.save()
-  await newUser.save()
-  // const allInvoices = await User.find().populate({
-  //   path: 'list',
-  //   populate: {
-  //     path: 'items',
-  //     model: List
-  //   }
-  // })
-  // await redisClient().set('allInvoices', JSON.stringify(allInvoices), {
-  //   EX: 10800
-  // })
-  return res.send({
-    message: 'success'
-  })
-  }
-  console.log(totaledData)
+
   return res.send({
     message: 'edit success'
   })

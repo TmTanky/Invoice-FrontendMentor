@@ -2,7 +2,9 @@
 import React, { Dispatch, SetStateAction, MouseEvent, useContext } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { AiFillDelete } from 'react-icons/ai'
+import { useSWRConfig } from 'swr'
 import { nanoid } from 'nanoid'
+import { useRouter } from 'next/router'
 import { Formik, Field, Form as FormMan, FieldArray } from 'formik'
 import { ErrorMsg } from '@/components/ErrorMsg'
 import { FormContext, FormContextType } from '@/contexts/formContext'
@@ -15,8 +17,22 @@ type FormProps = {
 }
 
 export const Form = ({ setShowForm }: FormProps) => {
-  const { editForm, toBeEdited, setToBeEdited } =
+  const { mutate } = useSWRConfig()
+  const router = useRouter()
+  const { editForm, id, setId, setListId, listId } =
     useContext<FormContextType>(FormContext)
+
+  const close = () => {
+    if (id) {
+      setId('')
+      setListId('')
+    }
+    setShowForm((prev) => !prev)
+  }
+
+  const revalidate = () => {
+    return mutate
+  }
   return (
     <AnimatePresence>
       <S.Container
@@ -24,10 +40,7 @@ export const Form = ({ setShowForm }: FormProps) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        onClick={() => {
-          if (toBeEdited) setToBeEdited('')
-          setShowForm((prev) => !prev)
-        }}
+        onClick={close}
       >
         <div
           aria-hidden='true'
@@ -41,14 +54,22 @@ export const Form = ({ setShowForm }: FormProps) => {
             exit={{ backgroundColor: 'red' }}
           >
             <Formik
-              initialValues={toBeEdited ? editForm : initialValues}
-              onSubmit={createOrEditInvoice(toBeEdited ? 'edit' : 'create')}
+              initialValues={id ? editForm : initialValues}
+              onSubmit={createOrEditInvoice(
+                id ? 'edit' : 'create',
+                router.query.id as string,
+                revalidate(),
+                {
+                  id,
+                  listId
+                }
+              )}
               validate={validate}
             >
               {({ values }) => (
                 <FormMan>
                   <div className='user'>
-                    <h1> {toBeEdited ? 'Edit' : 'Create'} Invoice </h1>
+                    <h1> {id ? 'Edit' : 'Create'} Invoice </h1>
                     <p> User </p>
                     <label htmlFor='fullName'> Full Name </label>
                     <ErrorMsg name='fullName' />
@@ -128,18 +149,11 @@ export const Form = ({ setShowForm }: FormProps) => {
                     )}
                   </FieldArray>
                   <div className='button-group'>
-                    <button
-                      onClick={() => {
-                        if (toBeEdited) setToBeEdited('')
-                        setShowForm((prev) => !prev)
-                      }}
-                      className='discard'
-                      type='button'
-                    >
+                    <button onClick={close} className='discard' type='button'>
                       Discard
                     </button>
                     <button className='create' type='submit'>
-                      Create
+                      Submit
                     </button>
                   </div>
                 </FormMan>

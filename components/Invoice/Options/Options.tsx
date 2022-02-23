@@ -12,7 +12,7 @@ type OptionsProps = {
 
 export const Options = ({ id, listID, invoice }: OptionsProps) => {
   const router = useRouter()
-  const { setShowForm, setToBeEdited, setEditForm } =
+  const { setShowForm, setId, setEditForm, setListId } =
     useContext<FormContextType>(FormContext)
 
   const deleteHandler = async () => {
@@ -25,7 +25,8 @@ export const Options = ({ id, listID, invoice }: OptionsProps) => {
   }
 
   const editHandler = () => {
-    setToBeEdited(id)
+    setId(id)
+    setListId(listID)
     setShowForm((prev) => !prev)
     setEditForm({
       id: invoice.id,
