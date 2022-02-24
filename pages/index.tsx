@@ -10,7 +10,7 @@ import { Toolbar } from '@/components/Toolbar'
 import * as S from '@/components/Pages/Index/Index.styles'
 import { InvoiceType } from '@/types/interfaces'
 import { FormContextType, FormContext } from 'contexts'
-import { filterInvoice, fetcher } from '../utils'
+import { filterInvoice, fetcher, url } from '../utils'
 
 type HomeProps = {
   invoices: InvoiceType[]
@@ -71,7 +71,7 @@ const Home = ({ invoices }: HomeProps) => {
 export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch('http://localhost:3000/api/getInvoices')
+  const res = await fetch(`${url}/api/getInvoices`)
   const data = (await res.json()) as {
     message: string
     data: InvoiceType[]

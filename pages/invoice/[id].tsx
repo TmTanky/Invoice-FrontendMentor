@@ -9,7 +9,7 @@ import { Options } from '@/components/Invoice/Options/Options'
 import * as S from '@/components/Pages/Invoice/index.styles'
 import { Loader } from '@/components/Spinner'
 import { InvoiceType } from '@/types/interfaces'
-import { fetcher } from '../../utils'
+import { fetcher, url } from '../../utils'
 
 type InvoiceItemPageProps = {
   invoice: InvoiceType
@@ -46,7 +46,11 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
           </Button>
         </div>
         <Info invoice={data.data} />
-        <Options invoice={data.data} id={data.data._id} listID={data.data.list.items._id} />
+        <Options
+          invoice={data.data}
+          id={data.data._id}
+          listID={data.data.list.items._id}
+        />
       </S.Container>
     </div>
   )
@@ -55,7 +59,7 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
 export default InvoiceItemPage
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch('http://localhost:3000/api/getInvoices')
+  const res = await fetch(`${url}/api/getInvoices`)
   const data = (await res.json()) as { message: string; data: InvoiceType[] }
   const paths = data.data.map((invoice) => {
     return {
@@ -71,7 +75,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string }
-  const res = await fetch(`http://localhost:3000/api/getInvoice/${id}`)
+  const res = await fetch(`${url}/api/getInvoice/${id}`)
   const data = (await res.json()) as {
     message: string
     data: InvoiceType
