@@ -13,7 +13,7 @@ export const RootContainer = styled.div`
     width: 100%;
   }
 
-  @media screen and (min-width: 300px) and (max-width: 650px) {
+  @media screen and (min-width: 300px) and (max-width: 800px) {
     flex-direction: column;
   }
 `

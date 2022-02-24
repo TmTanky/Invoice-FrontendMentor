@@ -1,13 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { Dispatch, SetStateAction, MouseEvent } from 'react'
+import React, { Dispatch, SetStateAction, MouseEvent, useContext } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { AiFillDelete } from 'react-icons/ai'
+import { useSWRConfig } from 'swr'
 import { nanoid } from 'nanoid'
+import { useRouter } from 'next/router'
 import { Formik, Field, Form as FormMan, FieldArray } from 'formik'
-import { toast } from 'react-toastify'
-import { ErrorMsg } from '../ErrorMsg'
+import { ErrorMsg } from '@/components/ErrorMsg'
+import { FormContext, FormContextType } from '@/contexts/formContext'
 import * as S from './Form.styles'
-import { validate } from '../../utils/formik/validate'
+import { validate, initialValues, createOrEditInvoice } from '../../utils'
 import 'react-toastify/dist/ReactToastify.css'
 
 type FormProps = {
@@ -15,9 +17,22 @@ type FormProps = {
 }
 
 export const Form = ({ setShowForm }: FormProps) => {
-  const dateNow = new Date().toLocaleString('en', {
-    dateStyle: 'medium'
-  })
+  const { mutate } = useSWRConfig()
+  const router = useRouter()
+  const { editForm, id, setId, setListId, listId } =
+    useContext<FormContextType>(FormContext)
+
+  const close = () => {
+    if (id) {
+      setId('')
+      setListId('')
+    }
+    setShowForm((prev) => !prev)
+  }
+
+  const revalidate = () => {
+    return mutate
+  }
   return (
     <AnimatePresence>
       <S.Container
@@ -25,7 +40,7 @@ export const Form = ({ setShowForm }: FormProps) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        onClick={() => setShowForm((prev) => !prev)}
+        onClick={close}
       >
         <div
           aria-hidden='true'
@@ -39,80 +54,22 @@ export const Form = ({ setShowForm }: FormProps) => {
             exit={{ backgroundColor: 'red' }}
           >
             <Formik
-              initialValues={{
-                id: nanoid(6).toUpperCase(),
-                fullName: '',
-                email: '',
-                streetAddress: '',
-                city: '',
-                country: '',
-                zipCode: '',
-                status: 'pending',
-                list: {
-                  createdAt: dateNow,
-                  items: [
-                    {
-                      id: nanoid(6).toUpperCase(),
-                      name: '',
-                      qty: '',
-                      price: ''
-                    }
-                  ]
+              initialValues={id ? editForm : initialValues}
+              onSubmit={createOrEditInvoice(
+                id ? 'edit' : 'create',
+                router.query.id as string,
+                revalidate(),
+                {
+                  id,
+                  listId
                 }
-              }}
-              onSubmit={async (values, { resetForm, setValues }) => {
-                const data = await (
-                  await fetch('/api/submit', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(values)
-                  })
-                ).json()
-                if (data.message === 'success') {
-                  resetForm()
-                  setValues({
-                    id: nanoid(6).toUpperCase(),
-                    fullName: '',
-                    email: '',
-                    city: '',
-                    country: '',
-                    streetAddress: '',
-                    zipCode: '',
-                    status: 'pending',
-                    list: {
-                      createdAt: '',
-                      items: [
-                        {
-                          id: nanoid(6).toUpperCase(),
-                          price: '',
-                          qty: '',
-                          name: ''
-                        }
-                      ]
-                    }
-                  })
-                }
-                toast('Invoice Submitted', {
-                  autoClose: 3000,
-                  position: 'bottom-right',
-                  style: {
-                    color: 'white',
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)'
-                  },
-                  draggable: true,
-                  progressStyle: {
-                    backgroundColor: 'rgb(20, 22, 37)'
-                  }
-                })
-              }}
+              )}
               validate={validate}
             >
               {({ values }) => (
                 <FormMan>
                   <div className='user'>
-                    <h1> Create Invoice </h1>
+                    <h1> {id ? 'Edit' : 'Create'} Invoice </h1>
                     <p> User </p>
                     <label htmlFor='fullName'> Full Name </label>
                     <ErrorMsg name='fullName' />
@@ -192,15 +149,11 @@ export const Form = ({ setShowForm }: FormProps) => {
                     )}
                   </FieldArray>
                   <div className='button-group'>
-                    <button
-                      onClick={() => setShowForm((prev) => !prev)}
-                      className='discard'
-                      type='button'
-                    >
+                    <button onClick={close} className='discard' type='button'>
                       Discard
                     </button>
                     <button className='create' type='submit'>
-                      Create
+                      Submit
                     </button>
                   </div>
                 </FormMan>

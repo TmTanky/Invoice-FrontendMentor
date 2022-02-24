@@ -6,8 +6,10 @@ export const Right = styled.div`
   align-items: center;
   /* justify-content: flex-start; */
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   padding: 10px 20px;
+  margin-bottom: 100px;
 
   p.no-invoice {
     margin-top: 50px;

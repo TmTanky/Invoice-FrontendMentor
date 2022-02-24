@@ -1,6 +1,7 @@
 import { Items, Status } from './types'
 
 export interface InvoiceType {
+  _id: string
   id: string
   fullName: string
   email: string

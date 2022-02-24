@@ -2,10 +2,14 @@ import React from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { Info } from '../../components/Invoice/Info/Info'
-import { Button } from '../../components/Button'
-import * as S from '../../components/Pages/Invoice/index.styles'
-import { InvoiceType } from '../../types/interfaces'
+import useSWR from 'swr'
+import { Info } from '@/components/Invoice/Info/Info'
+import { Button } from '@/components/Button'
+import { Options } from '@/components/Invoice/Options/Options'
+import * as S from '@/components/Pages/Invoice/index.styles'
+import { Loader } from '@/components/Spinner'
+import { InvoiceType } from '@/types/interfaces'
+import { fetcher } from '../../utils'
 
 type InvoiceItemPageProps = {
   invoice: InvoiceType
@@ -13,11 +17,20 @@ type InvoiceItemPageProps = {
 
 const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
   const router = useRouter()
+  const { data } = useSWR<{ data: InvoiceType }>(
+    `/api/getInvoice/${router.query.id}`,
+    fetcher,
+    { fallback: invoice, revalidateOnMount: true }
+  )
+
+  if (!data) {
+    return <Loader />
+  }
 
   return (
     <div>
       <Head>
-        <title> #{invoice.id} | Invoice </title>
+        <title> #{data.data.id} | Invoice </title>
       </Head>
       <S.Container>
         <div className='go-back'>
@@ -26,14 +39,14 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
             onClick={() => router.back()}
             type='button'
           >
-            {' '}
-            Go back{' '}
+            Go back
           </button>
           <Button status={invoice.status}>
-            {invoice.status.toUpperCase()}
+            {data.data.status.toUpperCase()}
           </Button>
         </div>
-        <Info invoice={invoice} />
+        <Info invoice={data.data} />
+        <Options invoice={data.data} id={data.data._id} listID={data.data.list.items._id} />
       </S.Container>
     </div>
   )
@@ -58,10 +71,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string }
-  const res = await fetch(`http://localhost:3000/api/getInvoice`, {
-    method: 'POST',
-    body: JSON.stringify({ id })
-  })
+  const res = await fetch(`http://localhost:3000/api/getInvoice/${id}`)
   const data = (await res.json()) as {
     message: string
     data: InvoiceType
