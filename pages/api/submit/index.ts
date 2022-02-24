@@ -34,7 +34,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === ('GET' || 'PATCH')) return res.status(405).end()
 
   const data = req.body as BodyProps
-  console.log(data)
   const totaledData = {
     ...data,
     list: {
