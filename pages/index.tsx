@@ -10,6 +10,7 @@ import { Toolbar } from '@/components/Toolbar'
 import * as S from '@/components/Pages/Index/Index.styles'
 import { InvoiceType } from '@/types/interfaces'
 import { FormContextType, FormContext } from 'contexts'
+import { getInvoices } from 'utils/fetch/invoices/getInvoices'
 import { filterInvoice, fetcher, url } from '../utils'
 
 type HomeProps = {
@@ -20,7 +21,7 @@ const Home = ({ invoices }: HomeProps) => {
   const { showForm, setShowForm } = useContext<FormContextType>(FormContext)
   const [filter, setFilter] = useState('')
   const { data } = useSWR<{ data: InvoiceType[] }>(
-    '/api/getInvoices',
+    `${url}/api/getInvoices`,
     fetcher,
     { fallback: invoices, revalidateOnMount: true }
   )
@@ -71,15 +72,17 @@ const Home = ({ invoices }: HomeProps) => {
 export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch(`${url}/api/getInvoices`)
-  const data = (await res.json()) as {
-    message: string
-    data: InvoiceType[]
-    type: string
-  }
+  // const res = await fetch(`${url}/api/getInvoices`)
+  // const data = (await res.json()) as {
+  //   message: string
+  //   data: InvoiceType[]
+  //   type: string
+  // }
+  const invoices = JSON.parse(await getInvoices())
+  // console.log(tae)
   return {
     props: {
-      invoices: data.data
+      invoices
     }
   }
 }

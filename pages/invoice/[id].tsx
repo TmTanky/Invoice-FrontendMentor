@@ -9,6 +9,8 @@ import { Options } from '@/components/Invoice/Options/Options'
 import * as S from '@/components/Pages/Invoice/index.styles'
 import { Loader } from '@/components/Spinner'
 import { InvoiceType } from '@/types/interfaces'
+import { getInvoice } from 'utils/fetch/invoices/getInvoice'
+import { getInvoices } from 'utils/fetch/invoices/getInvoices'
 import { fetcher, url } from '../../utils'
 
 type InvoiceItemPageProps = {
@@ -18,7 +20,7 @@ type InvoiceItemPageProps = {
 const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
   const router = useRouter()
   const { data } = useSWR<{ data: InvoiceType }>(
-    `/api/getInvoice/${router.query.id}`,
+    `${url}/api/getInvoice/${router.query.id}`,
     fetcher,
     { fallback: invoice, revalidateOnMount: true }
   )
@@ -59,9 +61,10 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
 export default InvoiceItemPage
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(`${url}/api/getInvoices`)
-  const data = (await res.json()) as { message: string; data: InvoiceType[] }
-  const paths = data.data.map((invoice) => {
+  // const res = await fetch(`${url}/api/getInvoices`)
+  const data = JSON.parse(await getInvoices()) as InvoiceType[]
+  // const data = (await res.json()) as { message: string; data: InvoiceType[] }
+  const paths = data.map((invoice) => {
     return {
       params: { id: invoice.id }
     }
@@ -75,15 +78,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string }
-  const res = await fetch(`${url}/api/getInvoice/${id}`)
-  const data = (await res.json()) as {
-    message: string
-    data: InvoiceType
-    type: string
-  }
+  const invoice = JSON.parse(await getInvoice(id))
+  // const res = await fetch(`${url}/api/getInvoice/${id}`)
+  // const data = (await res.json()) as {
+  //   message: string
+  //   data: InvoiceType
+  //   type: string
+  // }
   return {
     props: {
-      invoice: data.data
+      invoice
     }
   }
 }
