@@ -61,9 +61,7 @@ const InvoiceItemPage = ({ invoice }: InvoiceItemPageProps) => {
 export default InvoiceItemPage
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // const res = await fetch(`${url}/api/getInvoices`)
   const data = JSON.parse(await getInvoices()) as InvoiceType[]
-  // const data = (await res.json()) as { message: string; data: InvoiceType[] }
   const paths = data.map((invoice) => {
     return {
       params: { id: invoice.id }
@@ -79,12 +77,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string }
   const invoice = JSON.parse(await getInvoice(id))
-  // const res = await fetch(`${url}/api/getInvoice/${id}`)
-  // const data = (await res.json()) as {
-  //   message: string
-  //   data: InvoiceType
-  //   type: string
-  // }
   return {
     props: {
       invoice

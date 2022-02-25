@@ -72,14 +72,7 @@ const Home = ({ invoices }: HomeProps) => {
 export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
-  // const res = await fetch(`${url}/api/getInvoices`)
-  // const data = (await res.json()) as {
-  //   message: string
-  //   data: InvoiceType[]
-  //   type: string
-  // }
   const invoices = JSON.parse(await getInvoices())
-  // console.log(tae)
   return {
     props: {
       invoices
