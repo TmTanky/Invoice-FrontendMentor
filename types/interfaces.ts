@@ -19,3 +19,25 @@ export interface InvoiceType {
     }
   }
 }
+
+export type BodyProps = {
+  userID?: string
+  listID?: string
+  id: string
+  fullName: string
+  email: string
+  streetAddress: string
+  city: string
+  zipCode: string
+  country: string
+  status: string
+  list: {
+    createdAt: string
+    items: {
+      id: string
+      name: string
+      qty: number
+      price: number
+    }[]
+  }
+}
