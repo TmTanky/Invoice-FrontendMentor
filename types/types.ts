@@ -1,3 +1,5 @@
+import { Model } from "mongoose"
+
 export type Address = {
   street: string
   city: string
@@ -20,3 +22,5 @@ export type User = {
   email: string
   address: Address
 }
+
+export type MongooseModel = Model<any, {}, {}, {}>

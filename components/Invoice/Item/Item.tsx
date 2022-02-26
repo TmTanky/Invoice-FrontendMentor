@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import ReactTooltip from 'react-tooltip'
 import { Button } from '../../Button'
 import * as S from './Item.styles'
 
@@ -27,7 +28,10 @@ export const InvoiceItem = ({
           #<span>{id}</span>
         </p>
         <p className='due-date'> {dueDate} </p>
-        <p className='name'> {name} </p>
+        <ReactTooltip backgroundColor='white' textColor='black' />
+        <p data-tip={name} className='name'>
+          {name.length >= 15 ? `${name.slice(0, 15)}...` : name}
+        </p>
       </S.Upper>
       <S.Lower>
         <p className='amount'> ${total} </p>

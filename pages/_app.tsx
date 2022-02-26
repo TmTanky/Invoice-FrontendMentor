@@ -7,6 +7,7 @@ import { FormProvider } from 'contexts'
 import { darkTheme } from '../styles/theme/theme'
 
 function MyApp({ Component, pageProps }: AppProps) {
+
   return (
     <ThemeProvider theme={darkTheme}>
       <FormProvider>
