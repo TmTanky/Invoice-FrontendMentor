@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import List from '@/models/List'
+import User from '@/models/User'
 import { establishConnection } from '@/lib/mongo'
-import { User } from '@/models/User'
-import { List } from '@/models/List'
 
 establishConnection()
 

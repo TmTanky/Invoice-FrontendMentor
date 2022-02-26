@@ -1,10 +1,10 @@
-import { User } from '@/models/User'
-import { List } from '@/models/List'
-import { establishConnection } from '@/lib/mongo'
+import { MongooseModel } from '@/types/types'
 
-establishConnection()
-
-export const getInvoice = async (id: string) => {
+export const getInvoice = async (
+  id: string,
+  User: MongooseModel,
+  List: MongooseModel
+) => {
   const invoice = await User.findOne({ id }).populate({
     path: 'list',
     populate: {
