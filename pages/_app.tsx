@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <FormProvider>
-        <Layout>
+        <Layout setTheme={setTheme}>
           <ToastContainer />
           <Component {...pageProps} />
         </Layout>

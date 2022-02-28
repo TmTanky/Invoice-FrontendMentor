@@ -1,6 +1,7 @@
 // import { DefaultTheme } from 'styled-components'
 
 export const darkTheme = {
+  theme: 'dark',
   bgColor: {
     primary: 'rgb(20, 22, 37)',
     secondary: 'rgb(30, 33, 57)'
@@ -21,6 +22,7 @@ export const darkTheme = {
 }
 
 export const lightTheme = {
+  theme: 'light',
   bgColor: {
     primary: 'rgb(248, 248, 251)',
     secondary: 'white'
