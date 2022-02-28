@@ -2,15 +2,22 @@ import 'styled-components'
 
 declare module 'styled-components' {
   export interface DefaultTheme {
-    bgTransparent: {
+    bgColor: {
+      primary: string
+      secondary: string
+    }
+    buttonOuterBG: {
       paid: string
       pending: string
       draft: string
     }
-    bgStatus: {
+    buttonInnerBG: {
       paid: string
       pending: string
       draft: string
+    }
+    fontColor: {
+      default: string
     }
   }
 }

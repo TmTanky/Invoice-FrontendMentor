@@ -7,9 +7,9 @@ type ButtonProps = {
 
 export const themeSwitcher = (type?: string) => {
   if (type === 'bg') {
-    return darkTheme.bgTransparent
+    return darkTheme.buttonOuterBG
   }
-  return darkTheme.bgStatus
+  return darkTheme.buttonInnerBG
 }
 
 export const Button = styled.button<ButtonProps>`
