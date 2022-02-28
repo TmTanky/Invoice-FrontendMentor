@@ -18,7 +18,7 @@ export const TheForm = styled(motion.div)`
   top: 0;
   /* left: -800px; */
   left: 80px;
-  background-color: rgb(20, 22, 37);
+  background-color: ${({ theme }) => theme.bgColor.primary};
   width: 100%;
   height: 100%;
   max-width: 650px;
@@ -28,9 +28,18 @@ export const TheForm = styled(motion.div)`
   cursor: default;
 
   input {
-    padding: 0.5rem;
-    border-radius: 2.5px;
-    border: none;
+    padding: 1rem;
+    border-radius: 4px;
+    outline: none;
+    border: ${({ theme }) =>
+        theme.theme === 'light' ? 'rgb(223, 227, 250)' : 'rgb(37, 41, 69)'}
+      solid 1px;
+    background-color: ${({ theme }) => theme.bgColor.secondary};
+    color: ${({ theme }) => theme.fontColor.default};
+
+    &:focus {
+      border: 1px solid rgb(146, 119, 255);
+    }
   }
 
   .user,
@@ -40,7 +49,7 @@ export const TheForm = styled(motion.div)`
     display: flex;
     flex-direction: column;
     margin: 60px 50px;
-    color: white;
+    color: ${({ theme }) => theme.fontColor.default};
 
     h1 {
       margin-bottom: 20px;
@@ -57,7 +66,6 @@ export const TheForm = styled(motion.div)`
   }
 
   .address {
-
     @media screen and (max-width: 650px) {
       margin: 20px 20px 40px 20px;
     }
@@ -98,7 +106,7 @@ export const TheForm = styled(motion.div)`
     display: flex;
     flex-direction: column;
     margin: 0 50px 40px 50px;
-    color: white;
+    color: ${({ theme }) => theme.fontColor.default};
 
     p {
       margin-bottom: 20px;
@@ -181,9 +189,7 @@ export const TheForm = styled(motion.div)`
   }
 
   @media screen and (max-width: 800px) {
-    /* margin-top: 80px; */
     left: 0;
-    /* width: 100%; */
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
 

@@ -28,7 +28,7 @@ export const Container = styled.div`
       outline: none;
       cursor: pointer;
       background-color: transparent;
-      color: white;
+      color: ${({ theme }) => theme.fontColor.default};
       font-weight: 600;
     }
   }

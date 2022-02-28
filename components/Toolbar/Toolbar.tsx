@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import Select from 'react-select'
+import { useTheme } from 'styled-components'
 import * as S from './Toolbar.styles'
 
 const options = [
@@ -20,6 +21,8 @@ export const Toolbar = ({
   setShowForm,
   setFilter
 }: ToolbarProps) => {
+  const theme = useTheme()
+
   return (
     <S.Container>
       <div className='info'>
@@ -36,22 +39,25 @@ export const Toolbar = ({
             styles={{
               option: (provided) => ({
                 ...provided,
-                backgroundColor: 'rgb(30, 33, 57)',
-                color: 'white'
+                backgroundColor:
+                  theme.theme === 'dark' ? 'rgb(30, 33, 57)' : 'white',
+                color: theme.theme === 'light' ? 'rgb(30, 33, 57)' : 'white'
               }),
               control: (provided) => ({
                 ...provided,
-                backgroundColor: 'rgb(30, 33, 57)',
+                backgroundColor:
+                  theme.theme === 'dark' ? 'rgb(30, 33, 57)' : 'white',
                 border: 'none',
                 outline: 'none'
               }),
               menuList: (provided) => ({
                 ...provided,
-                backgroundColor: 'rgb(30, 33, 57)'
+                backgroundColor:
+                  theme.theme === 'dark' ? 'rgb(30, 33, 57)' : 'white'
               }),
               placeholder: (provided) => ({
                 ...provided,
-                color: 'white'
+                color: theme.theme === 'light' ? 'rgb(30, 33, 57)' : 'white'
               })
             }}
             className='select-status'

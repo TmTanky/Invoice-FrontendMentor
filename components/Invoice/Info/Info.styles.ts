@@ -60,7 +60,8 @@ export const Container = styled.div`
   }
 
   .lower {
-    background-color: rgb(37, 41, 69);
+    background-color: ${({ theme }) =>
+      theme.theme === 'light' ? theme.bgColor.primary : 'rgb(37, 41, 69)'};
     padding: 1.5rem;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -190,5 +191,6 @@ export const Container = styled.div`
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     background-color: rgb(20, 22, 37);
+    color: white;
   }
 `
