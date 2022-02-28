@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   margin: 10px 20px;
-  background-color: rgb(30, 33, 57);
+  background-color: ${({ theme }) => theme.bgColor.secondary};
   display: flex;
   width: 100%;
   max-width: 700px;
@@ -13,7 +13,7 @@ export const Container = styled.div`
   border: solid 1px transparent;
   border-radius: 8px;
   overflow: hidden;
-  color: white;
+  color: ${({ theme }) => theme.fontColor.default};
   padding: 10px 0;
   cursor: pointer;
 
@@ -31,6 +31,7 @@ export const Upper = styled.div`
   display: flex;
   align-items: center;
   margin-left: 10px;
+  color: ${({ theme }) => theme.fontColor.default};
 
   p {
     margin: 0 10px;
@@ -38,11 +39,12 @@ export const Upper = styled.div`
       font-weight: 700;
       color: #7e88c3;
       span {
-        color: white;
+        color: ${({ theme }) => theme.fontColor.default};
       }
     }
 
-    &.due-date, &.name {
+    &.due-date,
+    &.name {
       font-weight: 300;
     }
   }
@@ -57,7 +59,7 @@ export const Upper = styled.div`
       font-weight: 700;
       color: #7e88c3;
       span {
-        color: white;
+        color: ${({ theme }) => theme.fontColor.default};
       }
     }
   }
@@ -68,11 +70,12 @@ export const Lower = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  color: ${({ theme }) => theme.fontColor.default};
 
   p {
     &.amount {
       font-weight: 700;
-      color: white;
+      color: ${({ theme }) => theme.fontColor.default};
     }
   }
 

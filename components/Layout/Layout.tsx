@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext } from 'react'
+import React, { ReactNode, useContext, Dispatch, SetStateAction } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { FormContext, FormContextType } from 'contexts'
 import { Sidebar } from '../Sidebar'
@@ -6,17 +6,18 @@ import { Form } from '../Form'
 import * as S from './Layout.styles'
 
 type LayoutProps = {
+  setTheme: Dispatch<SetStateAction<string>>
   children: ReactNode
 }
 
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout = ({ children, setTheme }: LayoutProps) => {
   const { showForm, setShowForm } = useContext<FormContextType>(FormContext)
 
   return (
     <div>
       <S.RootContainer>
         <div className='first-section'>
-          <Sidebar />
+          <Sidebar setTheme={setTheme} />
         </div>
         {showForm && (
           <AnimatePresence>

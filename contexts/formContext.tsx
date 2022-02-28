@@ -1,10 +1,10 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
 import {
   createContext,
   useState,
   ReactNode,
   Dispatch,
-  SetStateAction
+  SetStateAction,
+  useMemo
 } from 'react'
 import { ValuesProps } from 'utils'
 
@@ -50,21 +50,19 @@ export const FormProvider = ({ children }: FormContextProps) => {
       ]
     }
   })
-
-  return (
-    <FormContext.Provider
-      value={{
-        showForm,
-        setShowForm,
-        editForm,
-        setEditForm,
-        setId,
-        id,
-        listId,
-        setListId
-      }}
-    >
-      {children}
-    </FormContext.Provider>
+  const value = useMemo(
+    () => ({
+      showForm,
+      setShowForm,
+      editForm,
+      setEditForm,
+      setId,
+      id,
+      listId,
+      setListId
+    }),
+    [editForm, id, listId, showForm]
   )
+
+  return <FormContext.Provider value={value}>{children}</FormContext.Provider>
 }

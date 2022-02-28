@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const RootContainer = styled.div`
-  background-color: rgb(20, 22, 37);
+  background-color: ${({ theme }) => theme.bgColor.primary};
   display: flex;
   height: 100%;
 

@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  color: white;
+  color: ${({ theme }) => theme.fontColor.default};
   width: 100%;
   max-width: 700px;
-  background-color: rgb(30, 33, 57);
+  background-color: ${({ theme }) => theme.bgColor.secondary};
   margin: 0 15px;
   padding: 1.5rem;
   height: max-content;

@@ -67,6 +67,7 @@ export const ThemeToggle = styled.div`
   justify-content: center;
   align-items: center;
   border-bottom: solid 1px gray;
+  cursor: pointer;
   
   @media screen and (min-width: 300px) and (max-width: 800px) {
     border-bottom: none;

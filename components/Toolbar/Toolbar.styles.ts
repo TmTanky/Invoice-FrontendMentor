@@ -13,7 +13,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: white;
+    color: ${({ theme }) => theme.fontColor.default};
 
     p.total-invoice {
       font-size: 13px;

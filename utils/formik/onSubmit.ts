@@ -26,7 +26,9 @@ export const createOrEditInvoice = (
       })
     ).json()
     if (data.message === ('success' || 'edit success')) {
-      revalidate(`/api/getInvoice/${routeID}`)
+      revalidate(
+        type === 'edit' ? `/api/getInvoice/${routeID}` : '/api/getInvoices'
+      )
       resetForm()
       setValues({
         id: nanoid(6).toUpperCase(),

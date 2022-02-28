@@ -7,14 +7,14 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 20px;
-  background-color: rgb(20, 22, 37);
+  background-color: ${({ theme }) => theme.bgColor.primary};
   margin-bottom: 100px;
 
   .go-back {
     color: white;
     width: 100%;
     max-width: 700px;
-    background-color: rgb(30, 33, 57);
+    background-color: ${({ theme }) => theme.bgColor.secondary};
     margin: 0 15px;
     margin-top: 100px;
     padding: 1.5rem;
@@ -28,7 +28,7 @@ export const Container = styled.div`
       outline: none;
       cursor: pointer;
       background-color: transparent;
-      color: white;
+      color: ${({ theme }) => theme.fontColor.default};
       font-weight: 600;
     }
   }
