@@ -4,7 +4,6 @@ export const Right = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  /* justify-content: flex-start; */
   flex-direction: column;
   height: 100%;
   min-height: 100vh;

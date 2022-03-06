@@ -9,7 +9,6 @@ export const Container = styled.div`
   height: 100%;
   min-height: 80px;
   max-height: 80px;
-  /* height: 100px; */
   border: solid 1px transparent;
   border-radius: 8px;
   overflow: hidden;

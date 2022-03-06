@@ -26,6 +26,7 @@ export const Form = ({ setShowForm }: FormProps) => {
     if (id) {
       setId('')
       setListId('')
+      return
     }
     setShowForm((prev) => !prev)
   }
