@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import { FormContext, FormContextType } from 'contexts'
+import { Popup } from '@/components/Popup'
 import { InvoiceType } from '@/types/interfaces'
 import * as S from './Options.styles'
 
@@ -12,16 +13,18 @@ type OptionsProps = {
 
 export const Options = ({ id, listID, invoice }: OptionsProps) => {
   const router = useRouter()
+  const [confirm, setConfirm] = useState(false)
   const { setShowForm, setId, setEditForm, setListId } =
     useContext<FormContextType>(FormContext)
 
   const deleteHandler = async () => {
-    const res = await fetch(`/api/delete/`, {
-      method: 'DELETE',
-      body: JSON.stringify({ id, listID })
-    })
-    const { message } = (await res.json()) as { message: string }
-    if (message) router.push('/')
+    setConfirm((prev) => !prev)
+    // const res = await fetch(`/api/delete/`, {
+    //   method: 'DELETE',
+    //   body: JSON.stringify({ id, listID })
+    // })
+    // const { message } = (await res.json()) as { message: string }
+    // if (message) router.push('/')
   }
 
   const editHandler = () => {
@@ -51,6 +54,7 @@ export const Options = ({ id, listID, invoice }: OptionsProps) => {
       <button onClick={deleteHandler} id='delete' type='button'>
         Delete
       </button>
+      {confirm && <Popup />}
     </S.Container>
   )
 }
