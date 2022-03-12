@@ -22,6 +22,7 @@ export const Toolbar = ({
   setFilter
 }: ToolbarProps) => {
   const theme = useTheme()
+  const toggleForm = () => setShowForm((prev) => !prev)
 
   return (
     <S.Container>
@@ -65,7 +66,7 @@ export const Toolbar = ({
           />
         </div>
         <div className='add'>
-          <button onClick={() => setShowForm((prev) => !prev)} type='button'>
+          <button onClick={toggleForm} type='button'>
             +
           </button>
         </div>

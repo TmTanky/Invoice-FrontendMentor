@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  margin: 10px 20px;
+  margin: 10px 0;
   background-color: ${({ theme }) => theme.bgColor.secondary};
   display: flex;
   width: 100%;
@@ -9,7 +9,6 @@ export const Container = styled.div`
   height: 100%;
   min-height: 80px;
   max-height: 80px;
-  /* height: 100px; */
   border: solid 1px transparent;
   border-radius: 8px;
   overflow: hidden;

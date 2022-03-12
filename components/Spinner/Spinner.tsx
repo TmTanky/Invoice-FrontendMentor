@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Container = styled.div`
-  background-color: rgb(20, 22, 37);
+  background-color: ${({ theme }) => theme.bgColor.primary};
   min-height: 100vh;
   display: flex;
   justify-content: center;

@@ -43,23 +43,26 @@ const Home = ({ fallback }: HomeProps) => {
             <Form setShowForm={setShowForm} />
           </AnimatePresence>
         )}
-        {filterInvoice(data?.data!, filter).map((item) => {
-          return (
-            <InvoiceItem
-              id={item.id}
-              key={item.id}
-              name={item.fullName}
-              total={item.list.items.list.reduce(
-                (acc, curr) => acc + (curr.total as number),
-                0
-              )}
-              dueDate={new Date(item.list.createdAt).toLocaleString('en', {
-                dateStyle: 'medium'
-              })}
-              status={item.status}
-            />
-          )
-        })}
+        <ul>
+          {filterInvoice(data?.data!, filter).map((item) => {
+            return (
+              <li key={item.id}>
+                <InvoiceItem
+                  id={item.id}
+                  name={item.fullName}
+                  total={item.list.items.list.reduce(
+                    (acc, curr) => acc + (curr.total as number),
+                    0
+                  )}
+                  dueDate={new Date(item.list.createdAt).toLocaleString('en', {
+                    dateStyle: 'medium'
+                  })}
+                  status={item.status}
+                />
+              </li>
+            )
+          })}
+        </ul>
         {filterInvoice(data?.data!, filter).length === 0 && (
           <p className='no-invoice'> No Invoices </p>
         )}

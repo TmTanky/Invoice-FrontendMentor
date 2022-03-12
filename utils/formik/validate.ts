@@ -18,7 +18,7 @@ export type ValuesProps = {
 }
 
 export const validate = (values: ValuesProps) => {
-  const errors: any = {}
+  const errors = {} as { [key: string]: string }
   if (!values.fullName) {
     errors.fullName = 'Required'
   }
@@ -37,14 +37,13 @@ export const validate = (values: ValuesProps) => {
   if (!values.zipCode) {
     errors.zipCode = 'Required'
   }
-  // check if all items in list are empty
   if (values.list.items.length === 0) {
     errors.list = 'Required'
   } else {
-    // check if all items in list are filled
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const listErrors: any = []
     values.list.items.forEach((item, index) => {
-      const itemErrors: any = {}
+      const itemErrors = {} as { [key: string]: string }
       if (!item.name) {
         itemErrors.name = 'Required'
       }

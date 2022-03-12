@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled.nav`
   background-color: rgb(30, 33, 57);
-  /* background-color: transparent; */
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   width: 80px;
@@ -49,10 +48,6 @@ export const LowerContainter = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  /* background-color: red; */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-evenly; */
   @media screen and (max-width: 800px) {
     flex-direction: row;
   }
@@ -62,7 +57,6 @@ export const ThemeToggle = styled.div`
   flex: 1;
   height: 80px;
   width: 80px;
-  /* background-color: blue; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,7 +72,6 @@ export const Avatar = styled.div`
   flex: 1;
   height: 80px;
   width: 80px;
-  /* background-color: yellow; */
   display: flex;
   justify-content: center;
   align-items: center;
