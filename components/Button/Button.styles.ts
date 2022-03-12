@@ -1,15 +1,8 @@
 import styled from 'styled-components'
-import { darkTheme } from '../../styles/theme/theme'
+import { themeSwitcher } from '../../utils/helpers'
 
 type ButtonProps = {
   status: 'paid' | 'pending' | 'draft'
-}
-
-export const themeSwitcher = (type?: string) => {
-  if (type === 'bg') {
-    return darkTheme.buttonOuterBG
-  }
-  return darkTheme.buttonInnerBG
 }
 
 export const Button = styled.button<ButtonProps>`

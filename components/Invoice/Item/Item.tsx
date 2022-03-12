@@ -20,9 +20,10 @@ export const InvoiceItem = ({
   status
 }: InvoiceItemProps) => {
   const router = useRouter()
+  const navigateToInvoice = () => router.push(`/invoice/${id}`)
 
   return (
-    <S.Container onClick={() => router.push(`/invoice/${id}`)}>
+    <S.Container onClick={navigateToInvoice}>
       <S.Upper>
         <p className='invoice-id'>
           #<span>{id}</span>

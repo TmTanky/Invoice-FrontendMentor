@@ -11,6 +11,8 @@ type SidebarProps = {
 
 export const Sidebar = ({ setTheme }: SidebarProps) => {
   const { theme } = useTheme() as { theme: 'light' | 'dark' }
+  const toggleTheme = () =>
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
 
   return (
     <S.Container>
@@ -26,9 +28,7 @@ export const Sidebar = ({ setTheme }: SidebarProps) => {
             height={25}
             width={25}
             alt='theme-toggle'
-            onClick={() =>
-              setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
-            }
+            onClick={toggleTheme}
           />
         </S.ThemeToggle>
         <S.Avatar>

@@ -26,11 +26,14 @@ module.exports = {
         extensions: ['.js', '.jsx', '.ts', '.tsx']
       }
     ],
-    'react/jsx-props-no-spreading': 'off',
-    'arrow-body-style': 'off',
-    'react/function-component-definition': 'off',
-    'import/prefer-default-export': 'off',
-    'import/extensions': 'off',
-    'no-underscore-dangle': 'off'
+    'react/jsx-props-no-spreading': 0,
+    'arrow-body-style': 0,
+    'react/function-component-definition': 0,
+    'import/prefer-default-export': 0,
+    'import/extensions': 0,
+    'no-underscore-dangle': 0,
+    '@typescript-eslint/no-unused-vars': 2,
+    '@typescript-eslint/no-explicit-any': 2,
+    '@typescript-eslint/prefer-as-const': 2,
   }
 }
