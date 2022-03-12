@@ -1,5 +1,3 @@
-// import { DefaultTheme } from 'styled-components'
-
 export const darkTheme = {
   theme: 'dark',
   bgColor: {
