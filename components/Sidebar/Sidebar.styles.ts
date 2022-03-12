@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled.nav`
   background-color: rgb(30, 33, 57);
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;

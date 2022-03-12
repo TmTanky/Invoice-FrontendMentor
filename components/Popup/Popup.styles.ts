@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const S = {
-  Container: styled.div`
+  Container: styled.dialog`
     background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
     height: 100%;

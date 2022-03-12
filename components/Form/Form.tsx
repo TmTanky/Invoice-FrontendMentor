@@ -8,8 +8,8 @@ import { useRouter } from 'next/router'
 import { Formik, Field, Form as FormMan, FieldArray } from 'formik'
 import { ErrorMsg } from '@/components/ErrorMsg'
 import { FormContext, FormContextType } from '@/contexts/formContext'
-import * as S from './Form.styles'
 import { validate, initialValues, createOrEditInvoice } from '../../utils'
+import * as S from './Form.styles'
 import 'react-toastify/dist/ReactToastify.css'
 
 type FormProps = {
@@ -96,7 +96,7 @@ export const Form = ({ setShowForm }: FormProps) => {
                   </div>
                   <FieldArray name='list.items'>
                     {({ remove, push }) => (
-                      <div className='item-list'>
+                      <ul className='item-list'>
                         <p> Item List </p>
                         {values.list.items.map((list, index) => (
                           <div key={list.id} className='item'>
@@ -146,7 +146,7 @@ export const Form = ({ setShowForm }: FormProps) => {
                         >
                           Add Item
                         </button>
-                      </div>
+                      </ul>
                     )}
                   </FieldArray>
                   <div className='button-group'>

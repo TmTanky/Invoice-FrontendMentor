@@ -10,6 +10,16 @@ export const Right = styled.div`
   padding: 10px 20px;
   margin-bottom: 100px;
 
+  > ul {
+    width: 100%;
+    > li {
+      list-style: none;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
   p.no-invoice {
     margin-top: 50px;
     font-weight: 500;
