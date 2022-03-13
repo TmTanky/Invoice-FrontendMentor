@@ -93,6 +93,10 @@ export const TheForm = styled(motion.div)`
 
       &.create {
         background-color: rgb(124, 93, 250);
+
+        &:disabled {
+          opacity: 0.5;
+        }
       }
     }
 

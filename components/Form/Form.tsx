@@ -153,7 +153,7 @@ export const Form = ({ setShowForm }: FormProps) => {
                     <button onClick={close} className='discard' type='button'>
                       Discard
                     </button>
-                    <button className='create' type='submit'>
+                    <button disabled={!values && true} className='create' type='submit'>
                       Submit
                     </button>
                   </div>

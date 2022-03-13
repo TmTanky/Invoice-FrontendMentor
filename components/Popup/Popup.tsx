@@ -23,11 +23,11 @@ export const Popup = ({ setConfirm, id, listID }: PopupProps) => {
   }
 
   return ReactDOM.createPortal(
-    <S.Container>
+    <S.Container data-testid='popup'>
       <form>
         <h2> Are you sure? </h2>
         <S.ButtonGroup>
-          <button onClick={cancel} type='button'>
+          <button data-testid='cancel-popup' onClick={cancel} type='button'>
             Cancel
           </button>
           <button onClick={deleteHandler} id='delete' type='button'>
