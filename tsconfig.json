@@ -22,7 +22,8 @@
       "@/lib/*": ["lib/*"],
       "@/types/*": ["types/*"],
       "@/contexts/*": ["contexts/*"]
-    }
+    },
+    "types": ["jest", "@testing-library/react", "@testing-library/jest-dom"]
   },
   "include": [
     "next-env.d.ts",
