@@ -2,7 +2,7 @@ import { InvoiceType } from '@/types/interfaces'
 
 export const mockData = [
   {
-    _id: '5e9f8f8f8f8f8f8f8f8f8f8',
+    _id: 'uid',
     city: 'New York',
     country: 'USA',
     email: 'sample@gmail.com',

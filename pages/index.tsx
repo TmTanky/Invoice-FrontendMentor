@@ -9,8 +9,8 @@ import { Form } from '@/components/Form'
 import { Toolbar } from '@/components/Toolbar'
 import * as S from '@/components/Pages/Index/Index.styles'
 import { InvoiceType } from '@/types/interfaces'
-import { FormContextType, FormContext } from 'contexts'
-import { establishConnection } from '@/lib/mongo'
+import { FormContextType, FormContext } from '../contexts'
+import { establishConnection } from '../lib/mongo'
 import { filterInvoice, fetcher, getInvoices } from '../utils'
 
 type HomeProps = {
@@ -43,10 +43,10 @@ const Home = ({ fallback }: HomeProps) => {
             <Form setShowForm={setShowForm} />
           </AnimatePresence>
         )}
-        <ul>
+        <ul data-testid='invoices'>
           {filterInvoice(data?.data!, filter).map((item) => {
             return (
-              <li key={item.id}>
+              <li data-testid={`invoice-${item.id}`} key={item.id}>
                 <InvoiceItem
                   id={item.id}
                   name={item.fullName}
@@ -75,11 +75,11 @@ export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
   const { User, List } = await establishConnection()
-  const invoices = await getInvoices(User, List)
+  const invoices = JSON.parse(await getInvoices(User, List)) as InvoiceType[]
   return {
     props: {
       fallback: {
-        '/api/article': invoices
+        '/api/getInvoices': invoices
       }
     }
   }

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import { InvoiceItem } from '@/components/Invoice'
-import { TestThemeProvider } from '../../../styles/theme/TestThemeProvider'
+import { TestThemeProvider } from '../../../contexts/TestThemeProvider'
 
 describe('It will render Invoice Items', () => {
   it('should render the item with a paid status', () => {

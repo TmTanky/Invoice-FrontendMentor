@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import { Options } from '../../../components/Invoice/Options/Options'
-import { TestThemeProvider } from '../../../styles/theme/TestThemeProvider'
+import { TestThemeProvider } from '../../../contexts/TestThemeProvider'
 import { FormProvider } from '../../../contexts'
 import { mockData } from '../../../utils'
 
