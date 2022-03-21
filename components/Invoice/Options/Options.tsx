@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { FormContext, FormContextType } from 'contexts'
+import { FormContext, FormContextType } from '../../../contexts'
 import { Popup } from '@/components/Popup'
 import { InvoiceType } from '@/types/interfaces'
 import * as S from './Options.styles'
@@ -40,13 +40,29 @@ export const Options = ({ id, listID, invoice }: OptionsProps) => {
 
   return (
     <S.Container>
-      <button onClick={editHandler} id='edit' type='button'>
+      <button
+        data-testid='edit-btn'
+        onClick={editHandler}
+        id='edit'
+        type='button'
+      >
         Edit
       </button>
-      <button onClick={confirmPopup} id='delete' type='button'>
+      <button
+        data-testid='confirm-btn'
+        onClick={confirmPopup}
+        id='delete'
+        type='button'
+      >
         Delete
       </button>
-      {confirm && <Popup id={id} listID={listID} setConfirm={setConfirm} />}
+      {confirm && (
+        <Popup
+          id={id}
+          listID={listID}
+          setConfirm={setConfirm}
+        />
+      )}
     </S.Container>
   )
 }

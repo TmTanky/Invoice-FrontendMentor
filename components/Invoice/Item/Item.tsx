@@ -26,17 +26,23 @@ export const InvoiceItem = ({
     <S.Container onClick={navigateToInvoice}>
       <S.Upper>
         <p className='invoice-id'>
-          #<span>{id}</span>
+          #<span data-testid='id'>{id}</span>
         </p>
-        <p className='due-date'> {dueDate} </p>
+        <p data-testid='dueDate' className='due-date'>
+          {dueDate}
+        </p>
         <ReactTooltip backgroundColor='white' textColor='black' />
-        <p data-tip={name} className='name'>
+        <p data-tip={name} data-testid='name' className='name'>
           {name.length >= 15 ? `${name.slice(0, 15)}...` : name}
         </p>
       </S.Upper>
       <S.Lower>
-        <p className='amount'> ${total} </p>
-        <Button status={status}> {status.toUpperCase()} </Button>
+        <p data-testid='amount' className='amount'>
+          ${total}
+        </p>
+        <Button data-testid='status' status={status}>
+          {status.toUpperCase()}
+        </Button>
       </S.Lower>
     </S.Container>
   )

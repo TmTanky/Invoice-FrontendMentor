@@ -18,7 +18,12 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  plugins: ['react', '@typescript-eslint'],
+  plugins: [
+    'react',
+    '@typescript-eslint',
+    'jest',
+    '@testing-library/react',
+  ],
   rules: {
     'react/jsx-filename-extension': [
       1,
@@ -34,6 +39,6 @@ module.exports = {
     'no-underscore-dangle': 0,
     '@typescript-eslint/no-unused-vars': 2,
     '@typescript-eslint/no-explicit-any': 2,
-    '@typescript-eslint/prefer-as-const': 2,
+    '@typescript-eslint/prefer-as-const': 2
   }
 }

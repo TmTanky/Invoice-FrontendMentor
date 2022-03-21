@@ -2,12 +2,12 @@
 import React, { Dispatch, SetStateAction, MouseEvent, useContext } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { AiFillDelete } from 'react-icons/ai'
-import { useSWRConfig } from 'swr'
+import { useSWRConfig, mutate } from 'swr'
 import { nanoid } from 'nanoid'
 import { useRouter } from 'next/router'
 import { Formik, Field, Form as FormMan, FieldArray } from 'formik'
 import { ErrorMsg } from '@/components/ErrorMsg'
-import { FormContext, FormContextType } from '@/contexts/formContext'
+import { FormContext, FormContextType } from '../../contexts'
 import { validate, initialValues, createOrEditInvoice } from '../../utils'
 import * as S from './Form.styles'
 import 'react-toastify/dist/ReactToastify.css'
@@ -17,7 +17,6 @@ type FormProps = {
 }
 
 export const Form = ({ setShowForm }: FormProps) => {
-  const { mutate } = useSWRConfig()
   const router = useRouter()
   const { editForm, id, setId, setListId, listId } =
     useContext<FormContextType>(FormContext)
@@ -26,6 +25,7 @@ export const Form = ({ setShowForm }: FormProps) => {
     if (id) {
       setId('')
       setListId('')
+      setShowForm((prev) => !prev)
       return
     }
     setShowForm((prev) => !prev)
@@ -34,6 +34,19 @@ export const Form = ({ setShowForm }: FormProps) => {
   const revalidate = () => {
     return mutate
   }
+
+  // const onSubmit = () => {
+  //   createOrEditInvoice(
+  //     id ? 'edit' : 'create',
+  //     router.query.id as string,
+  //     revalidate(),
+  //     {
+  //       id,
+  //       listId
+  //     }
+  //   )
+  // }
+
   return (
     <AnimatePresence>
       <S.Container
@@ -153,7 +166,11 @@ export const Form = ({ setShowForm }: FormProps) => {
                     <button onClick={close} className='discard' type='button'>
                       Discard
                     </button>
-                    <button className='create' type='submit'>
+                    <button
+                      disabled={!values && true}
+                      className='create'
+                      type='submit'
+                    >
                       Submit
                     </button>
                   </div>
