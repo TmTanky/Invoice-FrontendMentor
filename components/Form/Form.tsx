@@ -2,7 +2,7 @@
 import React, { Dispatch, SetStateAction, MouseEvent, useContext } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { AiFillDelete } from 'react-icons/ai'
-import { useSWRConfig } from 'swr'
+import { useSWRConfig, mutate } from 'swr'
 import { nanoid } from 'nanoid'
 import { useRouter } from 'next/router'
 import { Formik, Field, Form as FormMan, FieldArray } from 'formik'
@@ -17,7 +17,6 @@ type FormProps = {
 }
 
 export const Form = ({ setShowForm }: FormProps) => {
-  const { mutate } = useSWRConfig()
   const router = useRouter()
   const { editForm, id, setId, setListId, listId } =
     useContext<FormContextType>(FormContext)
@@ -153,7 +152,11 @@ export const Form = ({ setShowForm }: FormProps) => {
                     <button onClick={close} className='discard' type='button'>
                       Discard
                     </button>
-                    <button disabled={!values && true} className='create' type='submit'>
+                    <button
+                      disabled={!values && true}
+                      className='create'
+                      type='submit'
+                    >
                       Submit
                     </button>
                   </div>

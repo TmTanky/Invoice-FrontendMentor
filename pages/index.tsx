@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { AnimatePresence } from 'framer-motion'
-import useSWR, { SWRConfig } from 'swr'
+import { SWRConfig } from 'swr'
 import { Loader } from '@/components/Spinner'
 import { InvoiceItem } from '@/components/Invoice'
 import { Form } from '@/components/Form'
@@ -12,7 +12,8 @@ import { InvoiceType } from '@/types/interfaces'
 import { FormContextType, FormContext } from '../contexts'
 import { establishConnection } from '../lib/mongo'
 import { useInvoices } from '@/hooks/useInvoices'
-import { filterInvoice, fetcher, getInvoices } from '../utils'
+import { mockData } from '../utils'
+import { filterInvoice, getInvoices } from '../utils'
 
 type HomeProps = {
   fallback: {
@@ -30,6 +31,7 @@ const Home = ({ fallback }: HomeProps) => {
 
   return (
     <SWRConfig value={{ fallback }}>
+      {console.log(fallback)}
       <S.Right>
         <Head>
           <title> Invoice | FrontendMentor </title>
@@ -80,7 +82,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       fallback: {
-        '/api/getInvoices': invoices
+        '/api/getInvoices': mockData
       }
     }
   }
