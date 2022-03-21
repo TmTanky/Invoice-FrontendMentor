@@ -25,6 +25,7 @@ export const Form = ({ setShowForm }: FormProps) => {
     if (id) {
       setId('')
       setListId('')
+      setShowForm((prev) => !prev)
       return
     }
     setShowForm((prev) => !prev)
@@ -33,6 +34,19 @@ export const Form = ({ setShowForm }: FormProps) => {
   const revalidate = () => {
     return mutate
   }
+
+  // const onSubmit = () => {
+  //   createOrEditInvoice(
+  //     id ? 'edit' : 'create',
+  //     router.query.id as string,
+  //     revalidate(),
+  //     {
+  //       id,
+  //       listId
+  //     }
+  //   )
+  // }
+
   return (
     <AnimatePresence>
       <S.Container

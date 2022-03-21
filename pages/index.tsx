@@ -11,17 +11,11 @@ import * as S from '@/components/Pages/Index/Index.styles'
 import { InvoiceType } from '@/types/interfaces'
 import { FormContextType, FormContext } from '../contexts'
 import { establishConnection } from '../lib/mongo'
-import { useInvoices } from '@/hooks/useInvoices'
+import { useInvoices } from '../hooks/useInvoices'
 import { mockData } from '../utils'
 import { filterInvoice, getInvoices } from '../utils'
 
-type HomeProps = {
-  fallback: {
-    [key: string]: InvoiceType[]
-  }
-}
-
-const Home = ({ fallback }: HomeProps) => {
+const Home = () => {
   const { showForm, setShowForm } = useContext<FormContextType>(FormContext)
   const [filter, setFilter] = useState('')
   const { data } = useInvoices()
@@ -30,47 +24,44 @@ const Home = ({ fallback }: HomeProps) => {
   }
 
   return (
-    <SWRConfig value={{ fallback }}>
-      {console.log(fallback)}
-      <S.Right>
-        <Head>
-          <title> Invoice | FrontendMentor </title>
-        </Head>
-        <Toolbar
-          setFilter={setFilter}
-          setShowForm={setShowForm}
-          invoiceTotal={data?.data?.length!}
-        />
-        {showForm && (
-          <AnimatePresence exitBeforeEnter initial={showForm}>
-            <Form setShowForm={setShowForm} />
-          </AnimatePresence>
-        )}
-        <ul data-testid='invoices'>
-          {filterInvoice(data?.data!, filter).map((item) => {
-            return (
-              <li data-testid={`invoice-${item.id}`} key={item.id}>
-                <InvoiceItem
-                  id={item.id}
-                  name={item.fullName}
-                  total={item.list.items.list.reduce(
-                    (acc, curr) => acc + (curr.total as number),
-                    0
-                  )}
-                  dueDate={new Date(item.list.createdAt).toLocaleString('en', {
-                    dateStyle: 'medium'
-                  })}
-                  status={item.status}
-                />
-              </li>
-            )
-          })}
-        </ul>
-        {filterInvoice(data?.data!, filter).length === 0 && (
-          <p className='no-invoice'> No Invoices </p>
-        )}
-      </S.Right>
-    </SWRConfig>
+    <S.Right>
+      <Head>
+        <title> Invoice | FrontendMentor </title>
+      </Head>
+      <Toolbar
+        setFilter={setFilter}
+        setShowForm={setShowForm}
+        invoiceTotal={data?.data?.length!}
+      />
+      {showForm && (
+        <AnimatePresence exitBeforeEnter initial={showForm}>
+          <Form setShowForm={setShowForm} />
+        </AnimatePresence>
+      )}
+      <ul data-testid='invoices'>
+        {filterInvoice(data?.data!, filter).map((item) => {
+          return (
+            <li data-testid={`invoice-${item.id}`} key={item.id}>
+              <InvoiceItem
+                id={item.id}
+                name={item.fullName}
+                total={item.list.items.list.reduce(
+                  (acc, curr) => acc + (curr.total as number),
+                  0
+                )}
+                dueDate={new Date(item.list.createdAt).toLocaleString('en', {
+                  dateStyle: 'medium'
+                })}
+                status={item.status}
+              />
+            </li>
+          )
+        })}
+      </ul>
+      {filterInvoice(data?.data!, filter).length === 0 && (
+        <p className='no-invoice'> No Invoices </p>
+      )}
+    </S.Right>
   )
 }
 
@@ -82,7 +73,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       fallback: {
-        '/api/getInvoices': mockData
+        '/api/getInvoices': invoices
       }
     }
   }
