@@ -11,6 +11,7 @@ import * as S from '@/components/Pages/Index/Index.styles'
 import { InvoiceType } from '@/types/interfaces'
 import { FormContextType, FormContext } from '../contexts'
 import { establishConnection } from '../lib/mongo'
+import { useInvoices } from '@/hooks/useInvoices'
 import { filterInvoice, fetcher, getInvoices } from '../utils'
 
 type HomeProps = {
@@ -22,7 +23,7 @@ type HomeProps = {
 const Home = ({ fallback }: HomeProps) => {
   const { showForm, setShowForm } = useContext<FormContextType>(FormContext)
   const [filter, setFilter] = useState('')
-  const { data } = useSWR<{ data: InvoiceType[] }>(`/api/getInvoices`, fetcher)
+  const { data } = useInvoices()
   if (!data) {
     return <Loader />
   }
