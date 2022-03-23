@@ -20,11 +20,9 @@ export const Layout = ({ children, setTheme }: LayoutProps) => {
         <div className='first-section'>
           <Sidebar setTheme={setTheme} />
         </div>
-        {showForm && (
-          <AnimatePresence>
-            <Form setShowForm={setShowForm} />
-          </AnimatePresence>
-        )}
+        <AnimatePresence initial={false}>
+          {showForm && <Form setShowForm={setShowForm} />}
+        </AnimatePresence>
         <div className='second-section'>{children}</div>
       </S.RootContainer>
     </SWRConfig>
