@@ -1,4 +1,11 @@
-import React, { ReactNode, useContext, Dispatch, SetStateAction } from 'react'
+import React, {
+  ReactNode,
+  useContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState
+} from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { FormContext, FormContextType } from 'contexts'
 import { SWRConfig } from 'swr'
@@ -13,6 +20,11 @@ type LayoutProps = {
 
 export const Layout = ({ children, setTheme }: LayoutProps) => {
   const { showForm, setShowForm } = useContext<FormContextType>(FormContext)
+  const [showChild, setShowChild] = useState(false)
+
+  useEffect(() => {
+    setShowChild(true)
+  }, [showChild])
 
   return (
     <SWRConfig>
@@ -20,9 +32,9 @@ export const Layout = ({ children, setTheme }: LayoutProps) => {
         <div className='first-section'>
           <Sidebar setTheme={setTheme} />
         </div>
-        {showForm && (
-          <AnimatePresence>
-            <Form setShowForm={setShowForm} />
+        {showChild && (
+          <AnimatePresence initial={false}>
+            {showForm && <Form setShowForm={setShowForm} />}
           </AnimatePresence>
         )}
         <div className='second-section'>{children}</div>

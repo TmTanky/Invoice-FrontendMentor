@@ -11,8 +11,10 @@ type SidebarProps = {
 
 export const Sidebar = ({ setTheme }: SidebarProps) => {
   const { theme } = useTheme() as { theme: 'light' | 'dark' }
-  const toggleTheme = () =>
+  const toggleTheme = () => {
+    localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light')
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
+  }
 
   return (
     <S.Container>
