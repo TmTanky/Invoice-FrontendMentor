@@ -194,6 +194,10 @@ export const TheForm = styled(motion.div)`
 
   .select-status {
     margin: 0 50px 40px 50px;
+
+    @media screen and (max-width: 650px) {
+      margin: 0px 20px 40px 20px;
+    }
   }
 
   @media screen and (max-width: 800px) {

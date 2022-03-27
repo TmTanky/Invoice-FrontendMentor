@@ -18,11 +18,11 @@ import {
 import * as S from './Form.styles'
 import 'react-toastify/dist/ReactToastify.css'
 
-const options = [
-  { value: 'paid', label: 'Paid' },
-  { value: 'pending', label: 'Pending' },
-  { value: 'draft', label: 'Draft' }
-]
+// const options = [
+//   { value: 'paid', label: 'Paid' },
+//   { value: 'pending', label: 'Pending' },
+//   { value: 'draft', label: 'Draft' }
+// ]
 
 type FormProps = {
   setShowForm: Dispatch<SetStateAction<boolean>>
@@ -162,7 +162,14 @@ export const Form = ({ setShowForm }: FormProps) => {
                     </ul>
                   )}
                 </FieldArray>
-                <Select
+                {id && listId && (
+                  <Field className='select-status' as='select' name='status'>
+                    <option value='draft'> Draft </option>
+                    <option value='pending'> Pending </option>
+                    <option value='paid'> Paid </option>
+                  </Field>
+                )}
+                {/* <Select
                   isSearchable={false}
                   placeholder={firstLetterUppercase(values.status)}
                   options={options}
@@ -198,7 +205,7 @@ export const Form = ({ setShowForm }: FormProps) => {
                         theme.theme === 'light' ? 'rgb(30, 33, 57)' : 'white'
                     })
                   }}
-                />
+                /> */}
                 <div className='button-group'>
                   <button onClick={close} className='discard' type='button'>
                     Discard
