@@ -25,3 +25,7 @@ export const fetcher = async (url: string) => {
   const data = await res.json()
   return data
 }
+
+export const firstLetterUppercase = (text: string) => {
+  return text.charAt(0).toUpperCase() + text.slice(1)
+}

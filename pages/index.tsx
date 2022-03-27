@@ -2,7 +2,6 @@ import { useState, useContext } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { AnimatePresence } from 'framer-motion'
-import { SWRConfig } from 'swr'
 import { Loader } from '@/components/Spinner'
 import { InvoiceItem } from '@/components/Invoice'
 import { Form } from '@/components/Form'
@@ -12,11 +11,10 @@ import { InvoiceType } from '@/types/interfaces'
 import { FormContextType, FormContext } from '../contexts'
 import { establishConnection } from '../lib/mongo'
 import { useInvoices } from '../hooks/useInvoices'
-import { mockData } from '../utils'
 import { filterInvoice, getInvoices } from '../utils'
 
 const Home = () => {
-  const { showForm, setShowForm } = useContext<FormContextType>(FormContext)
+  const { setShowForm } = useContext<FormContextType>(FormContext)
   const [filter, setFilter] = useState('')
   const { data } = useInvoices()
   if (!data) {
@@ -33,11 +31,6 @@ const Home = () => {
         setShowForm={setShowForm}
         invoiceTotal={data?.data?.length!}
       />
-      {showForm && (
-        <AnimatePresence exitBeforeEnter initial={showForm}>
-          <Form setShowForm={setShowForm} />
-        </AnimatePresence>
-      )}
       <ul data-testid='invoices'>
         {filterInvoice(data?.data!, filter).map((item) => {
           return (
