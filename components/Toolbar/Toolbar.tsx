@@ -35,6 +35,7 @@ export const Toolbar = ({
       <div className='options'>
         <div className='select'>
           <Select
+            isSearchable={false}
             onChange={(e) => setFilter(e!.value)}
             placeholder='Filter by status'
             styles={{
@@ -57,6 +58,10 @@ export const Toolbar = ({
                   theme.theme === 'dark' ? 'rgb(30, 33, 57)' : 'white'
               }),
               placeholder: (provided) => ({
+                ...provided,
+                color: theme.theme === 'light' ? 'rgb(30, 33, 57)' : 'white'
+              }),
+              singleValue: (provided) => ({
                 ...provided,
                 color: theme.theme === 'light' ? 'rgb(30, 33, 57)' : 'white'
               })

@@ -1,14 +1,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Dispatch, SetStateAction, MouseEvent, useContext } from 'react'
-import { AnimatePresence } from 'framer-motion'
 import { AiFillDelete } from 'react-icons/ai'
-import { useSWRConfig, mutate } from 'swr'
+import { mutate } from 'swr'
 import { nanoid } from 'nanoid'
 import { useRouter } from 'next/router'
 import { Formik, Field, Form as FormMan, FieldArray } from 'formik'
 import { ErrorMsg } from '@/components/ErrorMsg'
 import { FormContext, FormContextType } from '../../contexts'
-import { validate, initialValues, createOrEditInvoice } from '../../utils'
+import {
+  validate,
+  initialValues,
+  createOrEditInvoice,
+} from '../../utils'
 import * as S from './Form.styles'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -34,18 +37,6 @@ export const Form = ({ setShowForm }: FormProps) => {
   const revalidate = () => {
     return mutate
   }
-
-  // const onSubmit = () => {
-  //   createOrEditInvoice(
-  //     id ? 'edit' : 'create',
-  //     router.query.id as string,
-  //     revalidate(),
-  //     {
-  //       id,
-  //       listId
-  //     }
-  //   )
-  // }
 
   return (
     <S.Container
@@ -161,6 +152,13 @@ export const Form = ({ setShowForm }: FormProps) => {
                     </ul>
                   )}
                 </FieldArray>
+                {id && listId && (
+                  <Field className='select-status' as='select' name='status'>
+                    <option value='draft'> Draft </option>
+                    <option value='pending'> Pending </option>
+                    <option value='paid'> Paid </option>
+                  </Field>
+                )}
                 <div className='button-group'>
                   <button onClick={close} className='discard' type='button'>
                     Discard

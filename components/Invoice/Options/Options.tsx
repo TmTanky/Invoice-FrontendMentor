@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
-import { FormContext, FormContextType } from '../../../contexts'
 import { Popup } from '@/components/Popup'
 import { InvoiceType } from '@/types/interfaces'
+import { FormContext, FormContextType } from '../../../contexts'
 import * as S from './Options.styles'
 
 type OptionsProps = {
@@ -31,6 +31,7 @@ export const Options = ({ id, listID, invoice }: OptionsProps) => {
       fullName: invoice.fullName,
       streetAddress: invoice.streetAddress,
       zipCode: invoice.zipCode,
+      status: invoice.status,
       list: {
         createdAt: invoice.list.createdAt,
         items: invoice.list.items.list
@@ -56,13 +57,7 @@ export const Options = ({ id, listID, invoice }: OptionsProps) => {
       >
         Delete
       </button>
-      {confirm && (
-        <Popup
-          id={id}
-          listID={listID}
-          setConfirm={setConfirm}
-        />
-      )}
+      {confirm && <Popup id={id} listID={listID} setConfirm={setConfirm} />}
     </S.Container>
   )
 }

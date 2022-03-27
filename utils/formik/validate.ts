@@ -6,6 +6,7 @@ export type ValuesProps = {
   city: string
   country: string
   zipCode: string
+  status: string
   list: {
     createdAt: string
     items: {
