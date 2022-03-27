@@ -193,7 +193,16 @@ export const TheForm = styled(motion.div)`
   }
 
   .select-status {
+    width: 30%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    outline: none;
     margin: 0 50px 40px 50px;
+    border: ${({ theme }) =>
+        theme.theme === 'light' ? 'rgb(223, 227, 250)' : 'rgb(37, 41, 69)'}
+      solid 1px;
+    background-color: ${({ theme }) => theme.bgColor.secondary};
+    color: ${({ theme }) => theme.fontColor.default};
 
     @media screen and (max-width: 650px) {
       margin: 0px 20px 40px 20px;
