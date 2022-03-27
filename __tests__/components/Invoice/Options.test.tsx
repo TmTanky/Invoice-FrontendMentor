@@ -22,7 +22,7 @@ describe('Option Component', () => {
   })
 
   test('should render the Options component and click Delete button to open Popup component then click Cancel button', async () => {
-    const { getByTestId, findByTestId, queryByTestId } = render(
+    const { getByTestId, queryByTestId } = render(
       <FormProvider>
         <TestThemeProvider>
           <Options
