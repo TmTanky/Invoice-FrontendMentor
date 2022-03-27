@@ -18,12 +18,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    'jest',
-    '@testing-library/react',
-  ],
+  plugins: ['react', '@typescript-eslint', 'jest'],
   rules: {
     'react/jsx-filename-extension': [
       1,

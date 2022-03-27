@@ -5,31 +5,21 @@ import { mutate } from 'swr'
 import { nanoid } from 'nanoid'
 import { useRouter } from 'next/router'
 import { Formik, Field, Form as FormMan, FieldArray } from 'formik'
-import { useTheme } from 'styled-components'
-import Select from 'react-select'
 import { ErrorMsg } from '@/components/ErrorMsg'
 import { FormContext, FormContextType } from '../../contexts'
 import {
   validate,
   initialValues,
   createOrEditInvoice,
-  firstLetterUppercase
 } from '../../utils'
 import * as S from './Form.styles'
 import 'react-toastify/dist/ReactToastify.css'
-
-// const options = [
-//   { value: 'paid', label: 'Paid' },
-//   { value: 'pending', label: 'Pending' },
-//   { value: 'draft', label: 'Draft' }
-// ]
 
 type FormProps = {
   setShowForm: Dispatch<SetStateAction<boolean>>
 }
 
 export const Form = ({ setShowForm }: FormProps) => {
-  const theme = useTheme()
   const router = useRouter()
   const { editForm, id, setId, setListId, listId } =
     useContext<FormContextType>(FormContext)
@@ -169,43 +159,6 @@ export const Form = ({ setShowForm }: FormProps) => {
                     <option value='paid'> Paid </option>
                   </Field>
                 )}
-                {/* <Select
-                  isSearchable={false}
-                  placeholder={firstLetterUppercase(values.status)}
-                  options={options}
-                  className='select-status'
-                  styles={{
-                    option: (provided) => ({
-                      ...provided,
-                      backgroundColor:
-                        theme.theme === 'dark' ? 'rgb(30, 33, 57)' : 'white',
-                      color:
-                        theme.theme === 'light' ? 'rgb(30, 33, 57)' : 'white'
-                    }),
-                    control: (provided) => ({
-                      ...provided,
-                      backgroundColor:
-                        theme.theme === 'dark' ? 'rgb(30, 33, 57)' : 'white',
-                      border: 'none',
-                      outline: 'none'
-                    }),
-                    menuList: (provided) => ({
-                      ...provided,
-                      backgroundColor:
-                        theme.theme === 'dark' ? 'rgb(30, 33, 57)' : 'white'
-                    }),
-                    placeholder: (provided) => ({
-                      ...provided,
-                      color:
-                        theme.theme === 'light' ? 'rgb(30, 33, 57)' : 'white'
-                    }),
-                    singleValue: (provided) => ({
-                      ...provided,
-                      color:
-                        theme.theme === 'light' ? 'rgb(30, 33, 57)' : 'white'
-                    })
-                  }}
-                /> */}
                 <div className='button-group'>
                   <button onClick={close} className='discard' type='button'>
                     Discard

@@ -42,7 +42,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
   if (req.method === 'POST') {
     const message = await createInvoice(totaledData, User, List)
-    console.log(totaledData)
     return res.send({
       message
     })

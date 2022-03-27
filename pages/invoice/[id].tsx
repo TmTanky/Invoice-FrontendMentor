@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 // eslint-disable-next-line camelcase
-import { SWRConfig, unstable_serialize } from 'swr'
+import { unstable_serialize } from 'swr'
 import { Info } from '@/components/Invoice/Info/Info'
 import { Button } from '@/components/Button'
 import { Options } from '@/components/Invoice/Options/Options'
@@ -14,13 +14,7 @@ import { useInvoice } from '@/hooks/useInvoice'
 import { establishConnection } from '@/lib/mongo'
 import { getInvoice, getInvoices } from '../../utils'
 
-type InvoiceItemPageProps = {
-  fallback: {
-    [key: string]: InvoiceType
-  }
-}
-
-const InvoiceItemPage = ({ fallback }: InvoiceItemPageProps) => {
+const InvoiceItemPage = () => {
   const router = useRouter()
   const { data } = useInvoice(router.query.id as string)
 
